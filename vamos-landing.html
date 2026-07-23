@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VAMOS — Stop Chasing. Start Coaching.</title>
+  <meta name="description" content="Bookings, payments, and reminders — built specifically for sports coaches."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange:  #e9734b;
+      --orange-d:#c4562e;
+      --black:   #1d1d1f;
+      --dark:    #000000;
+      --grey:    #6e6e73;
+      --mid:     #86868b;
+      --light:   #f5f5f7;
+      --rule:    #d2d2d7;
+      --white:   #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--black); background: var(--white);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+
+    /* ── SCROLL PROGRESS ──────────────────────────────────────────── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 2px; z-index: 9999;
+      background: var(--orange); width: 0%; transition: width .1s linear;
+    }
+
+    /* ── NAV ──────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 2px; left: 0; right: 0; z-index: 900;
+      height: 52px; display: flex; align-items: center;
+      padding: 0 40px; justify-content: space-between;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: saturate(180%) blur(24px);
+      -webkit-backdrop-filter: saturate(180%) blur(24px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .nav-wordmark { font-weight: 800; font-size: 16px; letter-spacing: 3px; color: var(--black); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: var(--black);
+      text-decoration: none; opacity: .65; transition: opacity .15s;
+      position: relative; padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 1.5px; background: var(--orange); transform: scaleX(0);
+      transition: transform .2s ease; transform-origin: left;
+    }
+    .nav-links a.active { opacity: 1; }
+    .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a:hover { opacity: 1; }
+    .nav-pill {
+      background: var(--orange); color: #fff;
+      font-size: 14px; font-weight: 700;
+      padding: 8px 20px; border-radius: 980px;
+      text-decoration: none; transition: background .15s, transform .1s;
+    }
+    .nav-pill:hover { background: var(--orange-d); transform: scale(1.03); }
+
+    /* ── HERO ─────────────────────────────────────────────────────── */
+    .hero { padding: 152px 40px 96px; text-align: center; max-width: 1000px; margin: 0 auto; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--rule); border-radius: 980px;
+      padding: 7px 18px; margin-bottom: 32px;
+      font-size: 14px; font-weight: 500; color: var(--grey);
+    }
+    .hero-tag .dot { width: 6px; height: 6px; background: var(--orange); border-radius: 50%; animation: blink 2s infinite; flex-shrink: 0; }
+    .hero-tag strong { color: var(--black); font-weight: 700; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+    h1.hero-title {
+      font-size: clamp(54px, 9vw, 108px);
+      font-weight: 900; line-height: .98; letter-spacing: -4px;
+      color: var(--black); margin-bottom: 28px;
+    }
+    h1.hero-title em { font-style: normal; color: var(--orange); }
+    .hero-sub {
+      font-size: clamp(18px, 2.2vw, 22px); font-weight: 500;
+      color: var(--grey); line-height: 1.55;
+      max-width: 500px; margin: 0 auto 44px;
+    }
+    .hero-cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--orange); color: #fff;
+      font-size: 17px; font-weight: 700;
+      padding: 16px 32px; border-radius: 980px;
+      text-decoration: none; transition: background .15s, transform .12s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--orange-d); transform: scale(1.02); }
+    .btn-text {
+      font-size: 17px; font-weight: 600; color: var(--orange);
+      text-decoration: none; padding: 16px 0;
+      display: inline-flex; align-items: center; gap: 5px; transition: gap .15s;
+    }
+    .btn-text:hover { gap: 10px; }
+    .hero-note { margin-top: 22px; font-size: 14px; font-weight: 500; color: var(--mid); }
+    .hero-note strong { color: var(--black); font-weight: 700; }
+
+    /* ── STATS ────────────────────────────────────────────────────── */
+    .stats-row {
+      display: flex; justify-content: center;
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .stat { flex: 1; max-width: 240px; padding: 36px 32px; text-align: center; border-right: 1px solid var(--rule); }
+    .stat:last-child { border-right: none; }
+    .stat-num { font-size: 36px; font-weight: 800; letter-spacing: -1.5px; color: var(--black); }
+    .stat-num span { color: var(--orange); }
+    .stat-label { font-size: 13px; font-weight: 500; color: var(--grey); margin-top: 5px; }
+
+    /* ── SPORTS TICKER ────────────────────────────────────────────── */
+    .ticker-wrap { overflow: hidden; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 14px 0; }
+    .ticker { display: flex; white-space: nowrap; animation: scroll 24s linear infinite; width: max-content; }
+    .ticker-item { padding: 0 32px; font-size: 14px; font-weight: 600; color: var(--grey); border-right: 1px solid var(--rule); }
+    .ticker-item span { color: var(--orange); }
+    @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── SECTION BASE ─────────────────────────────────────────────── */
+    section { padding: 96px 40px; }
+    section.alt { background: var(--light); }
+    section.dark { background: var(--dark); }
+    .wrap { max-width: 960px; margin: 0 auto; }
+    .wrap-wide { max-width: 1180px; margin: 0 auto; }
+    .tag { display: block; font-size: 12px; font-weight: 800; color: var(--orange); letter-spacing: 1px; margin-bottom: 10px; text-transform: uppercase; }
+    h2.title { font-size: clamp(32px, 4.8vw, 56px); font-weight: 800; letter-spacing: -2px; line-height: 1.05; margin-bottom: 14px; }
+    h2.title.center { text-align: center; }
+    h2.title.light { color: #fff; }
+    .sub { font-size: 17px; font-weight: 500; color: var(--grey); line-height: 1.7; max-width: 540px; }
+    .sub.center { margin-inline: auto; text-align: center; }
+    .sub.light { color: rgba(255,255,255,0.55); }
+
+    /* ── STATEMENT ────────────────────────────────────────────────── */
+    .statement-section { background: var(--dark); padding: 96px 40px; text-align: center; }
+    .statement-section p {
+      font-size: clamp(22px, 3.2vw, 38px); font-weight: 500; line-height: 1.55;
+      color: rgba(255,255,255,0.45); max-width: 820px; margin: 0 auto; letter-spacing: -.4px;
+    }
+    .statement-section p strong { color: #fff; font-weight: 800; }
+    .statement-section p em { color: var(--orange); font-style: normal; font-weight: 700; }
+
+    /* ── PAIN POINTS ──────────────────────────────────────────────── */
+    .pain-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--rule);
+      border: 1px solid var(--rule); border-radius: 20px;
+      overflow: hidden; margin-top: 60px;
+    }
+    .pain-card {
+      background: #fff; padding: 40px 32px;
+      transition: background .2s; cursor: default;
+    }
+    .pain-card:hover { background: #fafafa; }
+    .pain-n { font-size: 11px; font-weight: 800; color: var(--orange); letter-spacing: 1.5px; margin-bottom: 18px; display: block; text-transform: uppercase; }
+    .pain-card h3 { font-size: 18px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 10px; line-height: 1.3; }
+    .pain-card p { font-size: 15px; font-weight: 500; color: var(--grey); line-height: 1.65; }
+
+    /* ── SPLIT ROWS ───────────────────────────────────────────────── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .split.flip { direction: rtl; }
+    .split.flip > * { direction: ltr; }
+    .split-text h2 { font-size: clamp(28px,3.8vw,44px); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; line-height: 1.1; }
+    .split-text p { font-size: 16px; font-weight: 500; color: var(--grey); line-height: 1.7; margin-bottom: 12px; }
+    .demo-visual {
+      display: flex; flex-direction: column; gap: 14px;
+      min-height: 280px; justify-content: center;
+    }
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0px); box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.05), inset 0 1px 0 #fff; }
+      50%       { transform: translateY(-8px); box-shadow: 0 24px 56px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.07), inset 0 1px 0 #fff; }
+    }
+    .mock {
+      border: 1px solid rgba(0,0,0,0.07); border-radius: 16px;
+      padding: 22px 24px; background: #fff;
+      animation: cardFloat 4s ease-in-out infinite;
+      transition: transform .25s ease, box-shadow .25s ease;
+      cursor: default;
+    }
+    .mock:nth-child(2) { animation-delay: 1s; }
+    .mock:hover {
+      animation-play-state: paused;
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 28px 64px rgba(0,0,0,0.13), 0 8px 24px rgba(0,0,0,0.07), inset 0 1px 0 #fff;
+    }
+    .mock-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .mock-row:last-child { margin-bottom: 0; }
+    .mock-label { font-size: 12px; font-weight: 600; color: var(--grey); }
+    .mock-val { font-size: 13px; font-weight: 700; color: var(--black); }
+    .mock-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 980px; }
+    .mock-badge.green { background: #e8f5e9; color: #2e7d32; }
+    .mock-badge.orange { background: #fff3ee; color: var(--orange); }
+    .mock-pill { background: var(--orange); color: #fff; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 980px; display: inline-block; }
+    .mock-divider { height: 1px; background: var(--rule); margin: 10px 0; }
+    .mock-big { font-size: 22px; font-weight: 800; color: var(--orange); }
+
+    /* ── FEATURES ─────────────────────────────────────────────────── */
+    .feat-tabs { display: flex; gap: 8px; margin-top: 48px; flex-wrap: wrap; justify-content: center; }
+    .feat-tab-btn {
+      padding: 10px 20px; border-radius: 980px; font-size: 14px; font-weight: 600;
+      border: 1.5px solid var(--rule); background: #fff; color: var(--grey);
+      cursor: pointer; transition: all .2s; font-family: 'Inter',sans-serif;
+    }
+    .feat-tab-btn.active { border-color: var(--orange); color: var(--orange); background: #fff8f5; }
+    .feat-tab-btn:hover:not(.active) { border-color: var(--black); color: var(--black); }
+
+    .feat-grid { display: grid; grid-template-columns: repeat(3,1fr); column-gap: 40px; row-gap: 52px; margin-top: 40px; }
+    .feat-item { cursor: default; }
+    .feat-item .bar { width: 28px; height: 3px; background: var(--orange); border-radius: 2px; margin-bottom: 18px; transition: width .2s; }
+    .feat-item:hover .bar { width: 48px; }
+    .feat-item h3 { font-size: 18px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 8px; }
+    .feat-item p { font-size: 15px; font-weight: 500; color: var(--grey); line-height: 1.65; }
+    .feat-item .chip { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: .5px; text-transform: uppercase; }
+    .feat-item[data-cat] { transition: opacity .25s; }
+    .feat-item.hidden { display: none; }
+
+    /* ── PAYMENTS ─────────────────────────────────────────────────── */
+    .pay-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+      border-radius: 22px; overflow: hidden; margin-top: 56px;
+      background: rgba(255,255,255,0.04);
+    }
+    .pay-col { padding: 48px 40px; background: rgba(255,255,255,0.04); }
+    .pay-col.rec { background: rgba(233,115,75,.08); outline: 1px solid rgba(233,115,75,.35); border-radius: 22px; }
+    .rec-label { display: inline-block; background: var(--orange); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 980px; margin-bottom: 20px; }
+    .pay-col h3 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -.4px; }
+    .pay-col > p { font-size: 15px; font-weight: 500; color: rgba(255,255,255,.5); line-height: 1.6; margin-bottom: 28px; }
+    .pay-list { list-style: none; }
+    .pay-list li { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 15px; font-weight: 500; transition: background .15s; }
+    .pay-list li:last-child { border: none; }
+    .pay-list .ck { color: var(--orange); font-weight: 800; flex-shrink: 0; }
+    .pay-list .nx { color: rgba(255,255,255,.2); font-weight: 800; flex-shrink: 0; }
+    .pay-list span { color: rgba(255,255,255,.65); }
+
+    /* ── TESTIMONIALS ─────────────────────────────────────────────── */
+    .testi-track { position: relative; overflow: hidden; margin-top: 60px; }
+    .testi-row { display: flex; gap: 20px; transition: transform .45s cubic-bezier(.4,0,.2,1); }
+    .testi {
+      background: #fff; border: 1px solid var(--rule); border-radius: 20px;
+      padding: 36px 32px; flex: 0 0 calc(33.333% - 14px); min-width: 0;
+      transition: box-shadow .2s;
+    }
+    .testi:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+    .testi-sport { font-size: 12px; font-weight: 700; color: var(--orange); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; display: block; }
+    .testi blockquote { font-size: 15px; font-weight: 500; line-height: 1.7; color: var(--black); margin-bottom: 24px; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg,var(--orange),#f0956e); display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0; }
+    .testi-name { font-size: 14px; font-weight: 700; color: var(--black); }
+    .testi-role { font-size: 13px; font-weight: 500; color: var(--grey); }
+    .testi-dots { display: flex; gap: 8px; justify-content: center; margin-top: 28px; }
+    .testi-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rule); cursor: pointer; transition: background .2s, transform .2s; }
+    .testi-dot.active { background: var(--orange); transform: scale(1.25); }
+
+    /* ── BEFORE AFTER ─────────────────────────────────────────────── */
+    .ba-wrap { margin-top: 56px; border-radius: 20px; overflow: hidden; border: 1px solid var(--rule); }
+    .ba-head { display: grid; grid-template-columns: 1fr 1fr; }
+    .ba-head-cell { padding: 18px 32px; font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+    .ba-head-cell:first-child { background: var(--light); color: var(--grey); }
+    .ba-head-cell:last-child { background: var(--orange); color: #fff; }
+    .ba-row { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--rule); transition: background .15s; }
+    .ba-row:hover .ba-cell:first-child { background: #f9f9f9; }
+    .ba-row:hover .ba-cell:last-child { background: #fff2ec; }
+    .ba-cell { padding: 20px 32px; font-size: 15px; font-weight: 500; }
+    .ba-cell:first-child { background: #fff; color: var(--grey); }
+    .ba-cell:last-child { background: #fff8f5; color: var(--black); font-weight: 600; }
+    .ba-cell:last-child::before { content: '✓  '; color: var(--orange); font-weight: 800; }
+
+    /* ── PRICING ──────────────────────────────────────────────────── */
+    .pricing-toggle-wrap { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 32px 0 0; }
+    .pricing-toggle-wrap span { font-size: 14px; font-weight: 600; color: var(--grey); }
+    .toggle-switch {
+      width: 44px; height: 24px; background: var(--rule); border-radius: 980px;
+      cursor: pointer; position: relative; transition: background .2s; border: none;
+      flex-shrink: 0;
+    }
+    .toggle-switch.on { background: var(--orange); }
+    .toggle-knob {
+      width: 18px; height: 18px; background: #fff; border-radius: 50%;
+      position: absolute; top: 3px; left: 3px;
+      transition: transform .2s; box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    .toggle-switch.on .toggle-knob { transform: translateX(20px); }
+    .save-badge { background: #e8f5e9; color: #2e7d32; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 980px; }
+
+    .price-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-top: 40px; align-items: end; }
+    .plan { border: 1px solid var(--rule); border-radius: 20px; padding: 28px 20px; background: #fff; position: relative; transition: box-shadow .2s; }
+    .plan:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.07); }
+    .plan.pop { border: 2px solid var(--orange); transform: scale(1.04); z-index: 1; }
+    .plan.found { border-color: var(--orange); background: #fffaf8; }
+    .pop-tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--orange); color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 14px; border-radius: 980px; white-space: nowrap; }
+    .plan-name { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--grey); margin-bottom: 10px; }
+    .plan-price { font-size: 30px; font-weight: 800; letter-spacing: -1px; margin-bottom: 4px; }
+    .plan-price sub { font-size: 13px; font-weight: 500; color: var(--grey); vertical-align: baseline; }
+    .plan-price .annual-price { display: none; }
+    .annual-mode .plan-price .monthly-price { display: none; }
+    .annual-mode .plan-price .annual-price { display: inline; }
+    .plan-desc { font-size: 13px; font-weight: 500; color: var(--grey); line-height: 1.55; margin-top: 12px; }
+    .plan-perk { font-size: 12px; font-weight: 700; color: var(--orange); margin-top: 10px; }
+
+    /* ── FOUNDING ─────────────────────────────────────────────────── */
+    .founding-box {
+      background: var(--dark); border-radius: 28px;
+      padding: 88px 80px; text-align: center; max-width: 960px; margin: 0 auto;
+    }
+    .founding-live { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 980px; padding: 8px 20px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,.65); margin-bottom: 28px; }
+    .live-dot { width: 7px; height: 7px; background: var(--orange); border-radius: 50%; animation: blink 2s infinite; }
+    .founding-box h2 { font-size: clamp(36px,5.5vw,68px); font-weight: 900; color: #fff; letter-spacing: -2.5px; line-height: 1; margin-bottom: 14px; }
+    .founding-box h2 span { color: var(--orange); }
+    .founding-sub { font-size: 18px; font-weight: 500; color: rgba(255,255,255,.5); max-width: 460px; margin: 0 auto 52px; line-height: 1.6; }
+    .perk-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 48px; text-align: left; }
+    .perk-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 24px 22px; transition: border-color .2s; }
+    .perk-card:hover { border-color: rgba(233,115,75,.4); }
+    .perk-val { font-size: 24px; font-weight: 800; color: var(--orange); margin-bottom: 4px; }
+    .perk-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .perk-desc { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.4); line-height: 1.55; }
+
+    /* ── FAQ ──────────────────────────────────────────────────────── */
+    .faq-list { margin-top: 56px; max-width: 720px; margin-inline: auto; }
+    .faq-item { border-bottom: 1px solid var(--rule); }
+    .faq-item:first-child { border-top: 1px solid var(--rule); }
+    .faq-q {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 0; background: none; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
+      color: var(--black); text-align: left; gap: 24px;
+      transition: color .15s;
+    }
+    .faq-q:hover { color: var(--orange); }
+    .faq-icon {
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 1.5px solid var(--rule); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; transition: all .2s;
+      font-size: 16px; line-height: 1; color: var(--grey);
+    }
+    .faq-item.open .faq-icon { background: var(--orange); border-color: var(--orange); color: #fff; transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s ease, padding .35s ease;
+    }
+    .faq-item.open .faq-a { max-height: 400px; }
+    .faq-a-inner { padding: 0 0 22px; font-size: 15px; font-weight: 500; color: var(--grey); line-height: 1.75; max-width: 620px; }
+    .faq-a-inner strong { color: var(--black); font-weight: 700; }
+
+    /* ── OLD SCHOOL VS VAMOS ─────────────────────────────────────── */
+    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+    .vs-panel { border-radius: 22px; overflow: hidden; }
+    .vs-old { background: #f0f0f0; border: 1px solid #d8d8d8; }
+    .vs-new { background: #fff; border: 2px solid rgba(233,115,75,.35); box-shadow: 0 8px 40px rgba(233,115,75,.1); }
+    .vs-panel-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px 16px;
+    }
+    .vs-old .vs-panel-head { background: #e4e4e4; border-bottom: 1px solid #d0d0d0; }
+    .vs-new .vs-panel-head { background: #fff8f5; border-bottom: 1px solid rgba(233,115,75,.2); }
+    .vs-label {
+      font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;
+    }
+    .vs-label.old { color: #888; }
+    .vs-label.new { color: var(--orange); }
+    .vs-emoji { font-size: 22px; }
+    .vs-items { padding: 8px 0; }
+    .vs-item {
+      display: flex; gap: 14px; padding: 20px 24px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .vs-item:last-child { border-bottom: none; }
+    .vs-item-icon {
+      font-size: 18px; width: 38px; height: 38px; border-radius: 10px;
+      background: rgba(0,0,0,0.05); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .vs-item-body { flex: 1; min-width: 0; }
+    .vs-item-title { font-size: 14px; font-weight: 700; color: #555; margin-bottom: 10px; }
+    .vs-item-desc { font-size: 13px; font-weight: 500; color: #888; line-height: 1.65; }
+    .vs-item-note { font-size: 12px; font-weight: 700; color: #aaa; margin-top: 10px; }
+
+    /* Chat bubbles */
+    .vs-chat { display: flex; flex-direction: column; gap: 5px; margin-bottom: 8px; }
+    .vs-bubble {
+      display: inline-block; max-width: 85%; font-size: 12px; font-weight: 500;
+      padding: 7px 11px; border-radius: 14px; line-height: 1.4;
+    }
+    .vs-bubble.them { background: #e5e5ea; color: #333; align-self: flex-start; border-radius: 14px 14px 14px 4px; }
+    .vs-bubble.you { background: #007aff; color: #fff; align-self: flex-end; border-radius: 14px 14px 4px 14px; }
+
+    /* Mock mini inside vs panel */
+    .vs-mock-mini {
+      background: #fff; border: 1px solid var(--rule); border-radius: 12px;
+      padding: 14px 16px; margin-bottom: 8px;
+    }
+    .vs-mock-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .vs-mock-row:last-child { margin-bottom: 0; }
+    .vs-mock-divider { height: 1px; background: var(--rule); margin: 8px 0; }
+
+    /* SMS bubble */
+    .vs-bubble-clean {
+      background: #e8f5e9; border-radius: 12px; padding: 10px 14px;
+      font-size: 12px; font-weight: 500; color: #2e7d32; line-height: 1.6;
+    }
+
+    /* ── DIFFERENTIATION ─────────────────────────────────────────── */
+    .diff-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .diff-card {
+      background: #fff; border: 1px solid var(--rule); border-radius: 20px;
+      padding: 36px 28px; transition: box-shadow .2s, border-color .2s;
+    }
+    .diff-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); border-color: rgba(233,115,75,.3); }
+    .diff-icon { font-size: 28px; margin-bottom: 18px; }
+    .diff-card h3 { font-size: 18px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 12px; line-height: 1.25; }
+    .diff-card p { font-size: 15px; font-weight: 500; color: var(--grey); line-height: 1.7; margin-bottom: 16px; }
+    .diff-chip { display: inline-block; font-size: 11px; font-weight: 700; color: var(--grey); letter-spacing: .3px; background: var(--light); padding: 5px 12px; border-radius: 980px; }
+
+    /* ── STEPS ────────────────────────────────────────────────────── */
+    .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 56px; margin-top: 64px; }
+    .step-num { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--orange); display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--orange);margin-bottom:20px; }
+    .step h3 { font-size: 18px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 10px; }
+    .step p { font-size: 15px; font-weight: 500; color: var(--grey); line-height: 1.65; }
+
+    /* ── FINAL CTA ────────────────────────────────────────────────── */
+    .final-cta { padding: 100px 40px; text-align: center; background: var(--light); border-top: 1px solid var(--rule); }
+    .final-cta h2 { font-size: clamp(32px,5vw,60px); font-weight: 900; letter-spacing: -2px; margin-bottom: 14px; line-height: 1.05; }
+    .final-cta p { font-size: 18px; font-weight: 500; color: var(--grey); margin-bottom: 36px; }
+
+    /* ── FOOTER ───────────────────────────────────────────────────── */
+    footer { background: var(--light); border-top: 1px solid var(--rule); padding: 52px 40px 32px; }
+    .foot-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 36px; margin-bottom: 48px; }
+    .foot-brand-name { font-weight: 800; font-size: 15px; letter-spacing: 2.5px; margin-top: 8px; }
+    .foot-tagline { font-size: 13px; font-weight: 500; color: var(--grey); margin-top: 6px; font-style: italic; }
+    .foot-col h4 { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--black); margin-bottom: 14px; }
+    .foot-col a { display: block; font-size: 14px; font-weight: 500; color: var(--grey); text-decoration: none; margin-bottom: 9px; transition: color .15s; }
+    .foot-col a:hover { color: var(--orange); }
+    .foot-bottom { border-top: 1px solid var(--rule); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .foot-bottom span { font-size: 13px; font-weight: 500; color: var(--grey); }
+    .foot-bottom a { color: var(--orange); text-decoration: none; font-size: 13px; font-weight: 500; }
+
+    /* ── REVEAL ───────────────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── HERO GRADIENT ORB ───────────────────────────────────────── */
+    .hero-orb {
+      position: fixed; pointer-events: none; z-index: 0;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(233,115,75,0.07) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: left .12s ease, top .12s ease;
+    }
+    .hero { position: relative; z-index: 1; }
+
+    /* ── STAGGER CASCADE ─────────────────────────────────────────── */
+    .stagger-child {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .stagger-child.in { opacity: 1; transform: none; }
+
+    /* ── SCRAMBLE TEXT ───────────────────────────────────────────── */
+    .scramble-text { display: inline-block; }
+
+    /* ── MAGNETIC BUTTON ─────────────────────────────────────────── */
+    .btn-primary { display: inline-block; transition: background .15s, transform .1s cubic-bezier(.34,1.56,.64,1), box-shadow .2s; }
+    .btn-primary:hover { box-shadow: 0 12px 36px rgba(233,115,75,0.35); }
+
+    /* ── SECTION SLIDE-IN FROM LEFT/RIGHT ────────────────────────── */
+    .reveal-left  { opacity: 0; transform: translateX(-28px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal-right { opacity: 0; transform: translateX( 28px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal-left.in, .reveal-right.in { opacity: 1; transform: none; }
+
+    /* ── STAT NUMBER PULSE ON ENTRY ─────────────────────────────── */
+    @keyframes statPop { 0%{transform:scale(.85)} 60%{transform:scale(1.06)} 100%{transform:scale(1)} }
+    .stat-pop { animation: statPop .45s cubic-bezier(.34,1.56,.64,1) forwards; }
+
+    /* ── HAMBURGER ────────────────────────────────────────────────── */
+    .nav-hamburger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; background: none; border: none; cursor: pointer;
+      padding: 4px; border-radius: 8px; transition: background .15s;
+    }
+    .nav-hamburger:hover { background: rgba(0,0,0,0.05); }
+    .nav-hamburger span {
+      display: block; width: 20px; height: 2px;
+      background: var(--black); border-radius: 2px;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 54px; left: 0; right: 0; z-index: 899;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: saturate(180%) blur(24px);
+      -webkit-backdrop-filter: saturate(180%) blur(24px);
+      border-bottom: 1px solid var(--rule);
+      padding: 20px 24px 28px;
+      flex-direction: column; gap: 4px;
+      transform: translateY(-10px); opacity: 0;
+      transition: transform .25s ease, opacity .25s ease;
+      pointer-events: none;
+    }
+    .mobile-menu.open {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+    }
+    .mobile-menu a {
+      font-size: 17px; font-weight: 600; color: var(--black);
+      text-decoration: none; padding: 12px 0;
+      border-bottom: 1px solid var(--rule);
+      display: block; transition: color .15s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--orange); }
+    .mobile-menu .mobile-cta {
+      margin-top: 16px; background: var(--orange); color: #fff;
+      text-align: center; padding: 14px; border-radius: 980px;
+      font-weight: 700; font-size: 16px; border-bottom: none;
+    }
+    .mobile-menu .mobile-cta:hover { background: var(--orange-d); color: #fff; }
+
+    /* ── RESPONSIVE 900px ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+
+      .hero { padding: 120px 20px 72px; }
+      .hero-sub { max-width: 100%; }
+
+      section { padding: 72px 20px; }
+      .statement-section { padding: 72px 20px; }
+      .final-cta { padding: 80px 20px; }
+      footer { padding: 48px 20px 28px; }
+
+      .stats-row { flex-wrap: wrap; }
+      .stat { flex: 0 0 50%; max-width: 50%; border-right: none; border-bottom: 1px solid var(--rule); }
+      .stat:nth-child(odd) { border-right: 1px solid var(--rule); }
+      .stat:nth-last-child(-n+2) { border-bottom: none; }
+
+      .pain-grid { grid-template-columns: 1fr 1fr; }
+      .pain-card { padding: 28px 22px; }
+      .diff-grid { grid-template-columns: 1fr; gap: 14px; }
+      .vs-grid { grid-template-columns: 1fr; }
+
+      .split { grid-template-columns: 1fr; gap: 36px; }
+      .split.flip { direction: ltr; }
+      .demo-visual { min-height: auto; }
+
+      .feat-grid { grid-template-columns: 1fr 1fr; }
+      .pay-grid { grid-template-columns: 1fr; }
+      .pay-col { padding: 36px 28px; }
+
+      .testi { flex: 0 0 100%; }
+      .testi-row { gap: 0; }
+
+      .ba-head-cell { padding: 14px 16px; font-size: 11px; }
+      .ba-cell { padding: 14px 16px; font-size: 14px; }
+
+      .price-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .plan.pop { transform: none; }
+      .plan.found { margin-top: 0; }
+
+      .perk-row { grid-template-columns: 1fr 1fr; }
+      .founding-box { padding: 56px 28px; }
+
+      .steps-grid { grid-template-columns: 1fr; gap: 36px; }
+
+      .foot-top { gap: 28px; }
+    }
+
+    /* ── RESPONSIVE 560px (phones) ────────────────────────────────── */
+    @media (max-width: 560px) {
+      nav { padding: 0 16px; }
+
+      .hero { padding: 104px 16px 64px; }
+      h1.hero-title { letter-spacing: -2.5px; }
+      .hero-cta-row { flex-direction: column; align-items: center; gap: 12px; }
+      .btn-primary { width: 100%; text-align: center; font-size: 16px; padding: 15px 24px; }
+      .btn-text { font-size: 16px; }
+      .hero-note { font-size: 13px; }
+
+      section { padding: 56px 16px; }
+      .statement-section { padding: 56px 16px; }
+      .final-cta { padding: 64px 16px; }
+      footer { padding: 40px 16px 24px; }
+
+      .stat { flex: 0 0 100%; max-width: 100%; border-right: none; border-bottom: 1px solid var(--rule); }
+      .stat:last-child { border-bottom: none; }
+
+      .pain-grid { grid-template-columns: 1fr; border-radius: 14px; }
+      .pain-card { padding: 24px 20px; }
+
+      .split-text h2 { font-size: clamp(24px, 7vw, 34px); letter-spacing: -1px; }
+      .mock { padding: 18px 18px; }
+
+      .feat-tabs { gap: 6px; }
+      .feat-tab-btn { font-size: 13px; padding: 8px 14px; }
+      .feat-grid { grid-template-columns: 1fr; row-gap: 36px; }
+
+      .pay-col { padding: 28px 20px; }
+
+      /* Before/after: stack into label + value per row */
+      .ba-wrap { border-radius: 14px; }
+      .ba-head { display: none; }
+      .ba-row { grid-template-columns: 1fr; }
+      .ba-cell:first-child {
+        font-size: 13px; font-weight: 600; color: var(--grey);
+        padding: 14px 16px 4px; background: #fff;
+        border-bottom: none;
+      }
+      .ba-cell:last-child {
+        padding: 4px 16px 14px; background: #fff8f5;
+        border-bottom: 1px solid var(--rule);
+        font-size: 14px;
+      }
+      .ba-row { border-top: none; }
+      .ba-row:first-child .ba-cell:first-child { padding-top: 16px; }
+
+      .price-grid { grid-template-columns: 1fr; }
+      .plan { padding: 24px 18px; }
+
+      .perk-row { grid-template-columns: 1fr; }
+      .founding-box { padding: 44px 20px; border-radius: 20px; }
+      .founding-box h2 { letter-spacing: -1.5px; }
+      .founding-sub { font-size: 16px; margin-bottom: 36px; }
+
+      .faq-q { font-size: 15px; gap: 16px; padding: 18px 0; }
+      .faq-a-inner { font-size: 14px; }
+
+      .steps-grid { gap: 28px; }
+
+      .foot-top { flex-direction: column; gap: 32px; }
+      .foot-bottom { flex-direction: column; gap: 6px; }
+
+      .pricing-toggle-wrap { flex-wrap: wrap; justify-content: center; gap: 10px; }
+    }
+
+    /* ── RESPONSIVE 375px (small phones) ─────────────────────────── */
+    @media (max-width: 390px) {
+      .hero { padding: 96px 14px 56px; }
+      h1.hero-title { letter-spacing: -2px; }
+      section { padding: 48px 14px; }
+      .founding-box { padding: 36px 16px; }
+      .mock { padding: 14px 14px; }
+      .nav-pill { font-size: 13px; padding: 7px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div class="hero-orb" id="hero-orb"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <svg width="22" height="22" viewBox="0 0 100 100"><polygon points="5,8 50,92 95,8 79,8 50,74 21,8" fill="#e9734b"/></svg>
+    <span class="nav-wordmark">VAMOS</span>
+  </a>
+  <div class="nav-links">
+    <a href="#features" data-section="features">Features</a>
+    <a href="#payments" data-section="payments">Payments</a>
+    <a href="#pricing" data-section="pricing">Pricing</a>
+    <a href="#founding" data-section="founding">Founding Coach</a>
+    <a href="#how" data-section="how">How to Join</a>
+  </div>
+  <a href="coach-form.html" class="nav-pill">Apply Now</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#features" class="mobile-nav-link">Features</a>
+  <a href="#payments" class="mobile-nav-link">Payments</a>
+  <a href="#pricing" class="mobile-nav-link">Pricing</a>
+  <a href="#founding" class="mobile-nav-link">Founding Coach</a>
+  <a href="#faq" class="mobile-nav-link">FAQ</a>
+  <a href="coach-form.html" class="mobile-cta">Apply as Founding Coach →</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag reveal">
+    <span class="dot"></span>
+    <strong>Now open</strong> — 20 founding coach spots available
+  </div>
+  <h1 class="hero-title reveal">Stop chasing.<br/><em>Start coaching.</em></h1>
+  <p class="hero-sub reveal">The booking, scheduling, and payment platform built for sports coaches.</p>
+  <div class="hero-cta-row reveal">
+    <a href="coach-form.html" class="btn-primary">Apply as Founding Coach</a>
+    <a href="#demo" class="btn-text">See how it works ›</a>
+  </div>
+  <p class="hero-note reveal">₱299/mo locked for 2 years. <strong>Zero platform cut, forever.</strong></p>
+</div>
+
+<!-- STATS -->
+<div class="stats-row reveal">
+  <div class="stat">
+    <div class="stat-num" data-count="8">0</div>
+    <div class="stat-label">sports supported at launch</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num"><span>0</span>%</div>
+    <div class="stat-label">VAMOS cut on your session fee</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" data-count="20">0</div>
+    <div class="stat-label">founding spots total</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">24<span>/7</span></div>
+    <div class="stat-label">players can book anytime</div>
+  </div>
+</div>
+
+<!-- SPORTS TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item"><span>Tennis</span></div>
+    <div class="ticker-item"><span>Badminton</span></div>
+    <div class="ticker-item"><span>Pickleball</span></div>
+    <div class="ticker-item"><span>Table Tennis</span></div>
+    <div class="ticker-item"><span>Golf</span></div>
+    <div class="ticker-item"><span>Swimming</span></div>
+    <div class="ticker-item"><span>Diving</span></div>
+    <div class="ticker-item"><span>Padel</span></div>
+    <div class="ticker-item"><span>Tennis</span></div>
+    <div class="ticker-item"><span>Badminton</span></div>
+    <div class="ticker-item"><span>Pickleball</span></div>
+    <div class="ticker-item"><span>Table Tennis</span></div>
+    <div class="ticker-item"><span>Golf</span></div>
+    <div class="ticker-item"><span>Swimming</span></div>
+    <div class="ticker-item"><span>Diving</span></div>
+    <div class="ticker-item"><span>Padel</span></div>
+  </div>
+</div>
+
+<!-- STATEMENT -->
+<div class="statement-section">
+  <p class="reveal">
+    Most coaches manage their <strong>entire coaching practice</strong> through a Messenger thread.
+    Booking confirmations. Payment screenshots. Schedule tracking.
+    <em>You are running a business. You need better tools.</em>
+  </p>
+</div>
+
+<!-- PAIN POINTS -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <span class="tag">The problem</span>
+      <h2 class="title">Every week, coaches lose time<br/>they can never get back.</h2>
+    </div>
+    <div class="pain-grid reveal">
+      <div class="pain-card stagger-child"><span class="pain-n">01</span><h3>Booking on Messenger</h3><p>20 minutes of back-and-forth to confirm a single session — for every client, every week.</p></div>
+      <div class="pain-card stagger-child"><span class="pain-n">02</span><h3>Chasing payment screenshots</h3><p>You send your payment details and wait. Sometimes payment arrives. Sometimes the session starts anyway.</p></div>
+      <div class="pain-card stagger-child"><span class="pain-n">03</span><h3>No-shows with no recourse</h3><p>A player doesn't show. You lose the session fee and the court fee. There is nothing you can do.</p></div>
+      <div class="pain-card stagger-child"><span class="pain-n">04</span><h3>Reminders you forget to send</h3><p>A player misses an early session because nobody sent a reminder the night before. You can't remember everyone.</p></div>
+      <div class="pain-card stagger-child"><span class="pain-n">05</span><h3>No professional presence</h3><p>Your "booking page" is a pinned Messenger message or a note in your bio. You deserve better.</p></div>
+      <div class="pain-card stagger-child"><span class="pain-n">06</span><h3>Revenue you can't see</h3><p>No clear picture of what you earned last month, which clients are active, or your busiest day.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEE IT IN ACTION — 3 ROWS -->
+<section class="alt" id="demo">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center; margin-bottom:72px;">
+      <span class="tag">See it in action</span>
+      <h2 class="title center">Simple enough to set up today.<br/>Powerful enough to run your whole practice.</h2>
+      <p class="sub center" style="margin-top:12px;">No training needed. No tech background required. If you can use Messenger, you can use VAMOS.</p>
+    </div>
+
+    <!-- Row 1 -->
+    <div class="split reveal" style="margin-bottom:80px;">
+      <div class="split-text">
+        <span style="font-size:12px;font-weight:800;color:var(--orange);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:12px;">Step 1</span>
+        <h2>Your booking page, live in minutes.</h2>
+        <p>Add your sport, session rate, courts, and availability. Share your link. Players book themselves — no messages to you.</p>
+        <p>Works on any device. No app download required for players.</p>
+      </div>
+      <div class="demo-visual">
+        <div class="mock">
+          <div class="mock-row"><span class="mock-label">Coach</span><span class="mock-val">Coach Ana — Tennis</span></div>
+          <div class="mock-divider"></div>
+          <div class="mock-row"><span class="mock-label">Sport</span><span class="mock-val">Tennis · Badminton</span></div>
+          <div class="mock-row"><span class="mock-label">Session rate</span><span class="mock-val">Your rate</span></div>
+          <div class="mock-row"><span class="mock-label">Court</span><span class="mock-val">City Sports Club</span></div>
+          <div class="mock-row" style="margin-top:14px;"><span></span><span class="mock-pill">Book a session ›</span></div>
+        </div>
+        <div class="mock" style="opacity:.6;">
+          <div class="mock-row"><span class="mock-label">Available this week</span></div>
+          <div class="mock-row" style="margin-top:6px;"><span style="font-size:13px;font-weight:600;color:var(--black)">Mon · 7:00 AM</span><span class="mock-badge green">Open</span></div>
+          <div class="mock-row"><span style="font-size:13px;font-weight:600;color:var(--black)">Wed · 6:00 AM</span><span class="mock-badge green">Open</span></div>
+          <div class="mock-row"><span style="font-size:13px;font-weight:600;color:var(--black)">Sat · 7:00 AM</span><span class="mock-badge orange">2 left</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2 (flipped) -->
+    <div class="split flip reveal" style="margin-bottom:80px;">
+      <div class="split-text">
+        <span style="font-size:12px;font-weight:800;color:var(--orange);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:12px;">Step 2</span>
+        <h2>Players book themselves. You just confirm.</h2>
+        <p>They pick a slot, pay at booking, and send the request. You get a notification and confirm with one tap. Payment is held until you do.</p>
+        <p>No Messenger. No screenshots. No awkward follow-ups.</p>
+      </div>
+      <div class="demo-visual">
+        <div class="mock">
+          <div class="mock-row"><span class="mock-label">New booking request</span><span class="mock-badge orange">Pending review</span></div>
+          <div class="mock-divider"></div>
+          <div class="mock-row"><span class="mock-label">Player</span><span class="mock-val">Juan D.</span></div>
+          <div class="mock-row"><span class="mock-label">Date</span><span class="mock-val">Saturday · 7:00 AM</span></div>
+          <div class="mock-row"><span class="mock-label">Sessions</span><span class="mock-val">3 sessions booked</span></div>
+          <div class="mock-row"><span class="mock-label">Payment</span><span class="mock-val">Held — awaiting confirmation</span></div>
+          <div style="display:flex;gap:8px;margin-top:16px;">
+            <span class="mock-pill" style="background:var(--black)">Decline</span>
+            <span class="mock-pill">Confirm ›</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="split reveal">
+      <div class="split-text">
+        <span style="font-size:12px;font-weight:800;color:var(--orange);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:12px;">Step 3</span>
+        <h2>You confirm. Money arrives. Done.</h2>
+        <p>The moment you confirm, payment releases to your account. A receipt goes to the player automatically. A reminder is scheduled. Nothing else needed from you.</p>
+        <p>Every session tracked in your dashboard.</p>
+      </div>
+      <div class="demo-visual">
+        <div class="mock">
+          <div class="mock-row"><span class="mock-label">Booking confirmed</span><span class="mock-badge green">Paid out ✓</span></div>
+          <div class="mock-divider"></div>
+          <div class="mock-row"><span class="mock-label">Earned</span><span class="mock-big">Your full rate</span></div>
+          <div class="mock-row" style="margin-top:6px;"><span class="mock-label">To your account</span><span class="mock-badge green">Sent</span></div>
+        </div>
+        <div class="mock" style="opacity:.7;">
+          <div class="mock-row"><span class="mock-label" style="font-weight:700;color:var(--black)">Reminder scheduled automatically</span></div>
+          <div style="font-size:13px;font-weight:500;color:var(--grey);margin-top:6px;">SMS to Juan · 24 hours before session · no action needed</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;">
+      <span class="tag">Full feature list</span>
+      <h2 class="title center">Built for coaches, not communities.</h2>
+      <p class="sub center" style="margin-top:12px;">Other platforms are built for clubs and social groups. VAMOS is built for you — a professional running a serious coaching practice.</p>
+    </div>
+    <div class="feat-tabs reveal">
+      <button class="feat-tab-btn active" data-cat="all">All features</button>
+      <button class="feat-tab-btn" data-cat="booking">Booking</button>
+      <button class="feat-tab-btn" data-cat="payments">Payments</button>
+      <button class="feat-tab-btn" data-cat="clients">Clients</button>
+    </div>
+    <div class="feat-grid reveal">
+      <div class="feat-item" data-cat="booking"><div class="bar"></div><h3>Booking Page</h3><p>Your own public profile with live availability. Players book without messaging you.</p><span class="chip">All plans</span></div>
+      <div class="feat-item" data-cat="payments"><div class="bar"></div><h3>Automated Payouts</h3><p>Payments go straight to your account the moment you confirm a session. Instant.</p><span class="chip">Pro+</span></div>
+      <div class="feat-item" data-cat="payments"><div class="bar"></div><h3>No-Show Protection</h3><p>Payment held on booking. Your cancellation policy enforced automatically.</p><span class="chip">Pro+</span></div>
+      <div class="feat-item" data-cat="booking"><div class="bar"></div><h3>SMS & Email Reminders</h3><p>Players get automatic reminders before every session. Set once, runs forever.</p><span class="chip">Pro</span></div>
+      <div class="feat-item" data-cat="clients"><div class="bar"></div><h3>Revenue Dashboard</h3><p>Income, upcoming sessions, and client activity at a glance — always clear.</p><span class="chip">Pro</span></div>
+      <div class="feat-item" data-cat="clients"><div class="bar"></div><h3>Client Roster</h3><p>Full client list with session history, notes, and package balances — all in one place.</p><span class="chip">Pro</span></div>
+      <div class="feat-item" data-cat="booking"><div class="bar"></div><h3>Multi-Session Booking</h3><p>New players book up to 3 sessions. Returning players up to 10 — one checkout.</p><span class="chip">Pro</span></div>
+      <div class="feat-item" data-cat="booking"><div class="bar"></div><h3>My Courts</h3><p>Add your regular courts and assign them per booking. Players always know where to go.</p><span class="chip">All plans</span></div>
+      <div class="feat-item" data-cat="clients"><div class="bar"></div><h3>Verified Reviews</h3><p>Players leave reviews after confirmed sessions only. Build a real reputation over time.</p><span class="chip">All plans</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENTS DARK -->
+<section class="dark" id="payments">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="tag">How payments work</span>
+      <h2 class="title light">You never lose a session fee<br/>to a no-show again.</h2>
+      <p class="sub light" style="margin-top:12px;">Payment is held the moment a player books — not yet charged. You confirm, it releases to your account. You decline, nothing is charged. No signup with any payment gateway required.</p>
+    </div>
+    <div class="pay-grid reveal">
+      <div class="pay-col rec">
+        <span class="rec-label">Recommended</span>
+        <h3>Automated payments</h3>
+        <p>Player pays at booking. You confirm. Money hits your account. Receipt sent. Done.</p>
+        <ul class="pay-list">
+          <li><span class="ck">✓</span><span>Payment confirmed before session starts</span></li>
+          <li><span class="ck">✓</span><span>Digital receipt sent to player instantly</span></li>
+          <li><span class="ck">✓</span><span>No-show policy enforced automatically</span></li>
+          <li><span class="ck">✓</span><span>Payout to your account — automatic</span></li>
+          <li><span class="ck">✓</span><span>Full revenue tracked in your dashboard</span></li>
+        </ul>
+      </div>
+      <div class="pay-col">
+        <h3>QR Code</h3>
+        <p>Player scans your payment QR. You confirm the screenshot. Same as today — but tracked in VAMOS.</p>
+        <ul class="pay-list">
+          <li><span class="nx">✗</span><span>Manual screenshot confirmation required</span></li>
+          <li><span class="nx">✗</span><span>No automatic no-show protection</span></li>
+          <li><span class="nx">✗</span><span>No instant receipts</span></li>
+          <li><span class="ck">✓</span><span>Zero setup — upload your QR once</span></li>
+          <li><span class="ck">✓</span><span>Switch to automated anytime, no migration</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="alt">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;">
+      <span class="tag">Early coaches</span>
+      <h2 class="title center">What coaches are saying.</h2>
+    </div>
+    <div class="testi-track reveal">
+      <div class="testi-row" id="testi-row">
+        <div class="testi">
+          <span class="testi-sport">Tennis · Davao</span>
+          <blockquote>"I used to spend every Sunday night confirming bookings on Messenger. Now I check VAMOS on Monday morning and everything is already scheduled and paid."</blockquote>
+          <div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Coach Marie</div><div class="testi-role">Private tennis coach</div></div></div>
+        </div>
+        <div class="testi">
+          <span class="testi-sport">Badminton · Cebu</span>
+          <blockquote>"The no-show protection alone makes this worth it. Three years of chasing payment screenshots, and now it is just handled. My late players dropped significantly too."</blockquote>
+          <div class="testi-author"><div class="testi-avatar">R</div><div><div class="testi-name">Coach Raf</div><div class="testi-role">Badminton coach</div></div></div>
+        </div>
+        <div class="testi">
+          <span class="testi-sport">Swimming · Manila</span>
+          <blockquote>"My booking page looks more professional than coaches who have been doing this for 10 years. Players trust it immediately. I got 4 new inquiries in my first week."</blockquote>
+          <div class="testi-author"><div class="testi-avatar">J</div><div><div class="testi-name">Coach Jen</div><div class="testi-role">Swimming coach</div></div></div>
+        </div>
+      </div>
+      <div class="testi-dots">
+        <div class="testi-dot active" data-dot="0"></div>
+        <div class="testi-dot" data-dot="1"></div>
+        <div class="testi-dot" data-dot="2"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATION -->
+<section class="alt">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:56px;">
+      <span class="tag">Why VAMOS</span>
+      <h2 class="title center">Built for coaches.<br/>Not communities.</h2>
+      <p class="sub center" style="margin-top:12px;">Other platforms treat coaches as one of many. VAMOS exists for one person only — the coach running a business.</p>
+    </div>
+    <div class="diff-grid reveal">
+      <div class="diff-card">
+        <div class="diff-icon">⚡</div>
+        <h3>Your players don't need an app.</h3>
+        <p>Send your booking link anywhere — Instagram bio, Messenger, Viber. Players tap, pick a slot, pay, and they're booked. No download. No account. No friction.</p>
+        <span class="diff-chip">Other platforms require player signup</span>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">💸</div>
+        <h3>You keep every peso you earn.</h3>
+        <p>VAMOS takes zero cut from your session fees. No percentage skimmed per booking, no hidden commission. What you charge is what you receive.</p>
+        <span class="diff-chip">Other platforms charge per transaction</span>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🔒</div>
+        <h3>Your client list stays yours.</h3>
+        <p>On marketplace platforms, your players are the platform's players too. On VAMOS, you own the relationship. Your clients book you — not a directory.</p>
+        <span class="diff-chip">Marketplaces commoditize coaches</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OLD SCHOOL VS VAMOS -->
+<section>
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:56px;">
+      <span class="tag">Old school vs. VAMOS</span>
+      <h2 class="title center">Most coaches are still doing this<br/>the hard way.</h2>
+      <p class="sub center" style="margin-top:12px;">See what a typical Monday looks like — before and after VAMOS.</p>
+    </div>
+    <div class="vs-grid reveal">
+
+      <!-- OLD SCHOOL -->
+      <div class="vs-panel vs-old">
+        <div class="vs-panel-head">
+          <span class="vs-label old">Old school</span>
+          <span class="vs-emoji">😩</span>
+        </div>
+        <div class="vs-items">
+
+          <div class="vs-item">
+            <div class="vs-item-icon">💬</div>
+            <div class="vs-item-body">
+              <div class="vs-item-title">Monday morning Messenger</div>
+              <div class="vs-chat">
+                <div class="vs-bubble them">Hi coach! Free ba kayo this Sat 7am?</div>
+                <div class="vs-bubble you">Teka check ko muna sched ko</div>
+                <div class="vs-bubble them">Ok! Magkano po?</div>
+                <div class="vs-bubble you">Send na lang kayo sa GCash 09xx-xxx-xxxx</div>
+                <div class="vs-bubble them">Sent na po! 📸</div>
+                <div class="vs-bubble you">Ok confirmed! See you Sat 👍</div>
+              </div>
+              <div class="vs-item-note">⏱ 20 minutes. For one booking.</div>
+            </div>
+          </div>
+
+          <div class="vs-item">
+            <div class="vs-item-icon">📸</div>
+            <div class="vs-item-body">
+              <div class="vs-item-title">Screenshot as proof of payment</div>
+              <div class="vs-item-desc">Someone sends a blurry GCash screenshot. You save it to your gallery. You search for it on Saturday morning. It's buried under 200 photos.</div>
+            </div>
+          </div>
+
+          <div class="vs-item">
+            <div class="vs-item-icon">📒</div>
+            <div class="vs-item-body">
+              <div class="vs-item-title">Scheduling by notebook</div>
+              <div class="vs-item-desc">Your weekly schedule is a notebook page, a Viber chat, and your memory. You double-book a slot on Wednesday. One client shows up. The other one is furious.</div>
+            </div>
+          </div>
+
+          <div class="vs-item">
+            <div class="vs-item-icon">🔕</div>
+            <div class="vs-item-body">
+              <div class="vs-item-title">No-show. No recourse.</div>
+              <div class="vs-item-desc">Saturday 7am. You're at the court. The player doesn't come. No penalty. You lose the court fee and the session income. Nothing you can do.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VAMOS -->
+      <div class="vs-panel vs-new">
+        <div class="vs-panel-head">
+          <span class="vs-label new">With VAMOS</span>
+          <span class="vs-emoji">😌</span>
+        </div>
+        <div class="vs-items">
+
+          <div class="vs-item">
+            <div class="vs-item-icon" style="background:rgba(233,115,75,.12);color:var(--orange);">🔗</div>
+            <div class="vs-item-body">
+              <div class="vs-item-title" style="color:var(--black);">Share your link. Done.</div>
+              <div class="vs-mock-mini">
+                <div class="vs-mock-row"><span style="font-size:12px;color:var(--grey);font-weight:600;">vamos.app/coach/ana</span><span class="mock-badge green">Live</span></div>
+                <div class="vs-mock-divider"></div>
+                <div class="vs-mock-row"><span style="font-size:13px;font-weight:700;">Saturday · 7:00 AM</span><span class="mock-badge green">Open</span></div>
+                <div class="vs-mock-row"><span style="font-size:13px;font-weight:700;">Saturday · 9:00 AM</span><span class="mock-badge green">Open</span></div>
+                <div style="margin-top:12px;"><span class="mock-pill" style="font-size:11px;">Book & pay now ›</span></div>
+              </div>
+              <div class="vs-item-note" style="color:var(--orange);">✓ Players book themselves. No messages needed.</div>
+            </div>
+          </div>
+
+          <div class="vs-item">
+            <div class="vs-item-icon" style="background:rgba(233,115,75,.12);color:var(--orange);">💳</div>
+            <div class="vs-item-body">
+              <div class="vs-item-title" style="color:var(--black);">Payment held. Released when you confirm.</div>
+              <div class="vs-mock-mini">
+                <div class="vs-mock-row"><span style="font-size:12px;color:var(--grey);font-weight:600;">New request from Juan D.</span><span class="mock-badge orange">Pending</span></div>
+                <div class="vs-mock-divider"></div>
+                <div class="vs-mock-row"><span style="font-size:12px;color:var(--grey);">Payment</span><span style="font-size:12px;font-weight:700;">Held · GCash</span></div>
+                <div style="display:flex;gap:6px;margin-top:10px;">
+                  <span class="mock-pill" style="background:var(--black);font-size:11px;">Decline</span>
+                  <span class="mock-pill" style="font-size:11px;">Confirm ›</span>
+                </div>
+              </div>
+              <div class="vs-item-note" style="color:var(--orange);">✓ No screenshots. No chasing. One tap.</div>
+            </div>
+          </div>
+
+          <div class="vs-item">
+            <div class="vs-item-icon" style="background:rgba(233,115,75,.12);color:var(--orange);">📨</div>
+            <div class="vs-item-body">
+              <div class="vs-item-title" style="color:var(--black);">Reminders sent automatically.</div>
+              <div class="vs-mock-mini">
+                <div style="font-size:12px;font-weight:600;color:var(--grey);margin-bottom:8px;">Auto SMS · Sent by VAMOS</div>
+                <div class="vs-bubble-clean">"Hi Juan! Reminder: your session with Coach Ana is tomorrow, Saturday at 7:00 AM. See you at the court! 🎾"</div>
+                <div style="font-size:11px;color:var(--grey);margin-top:6px;font-weight:600;">Sent 24 hrs before · No action needed from you</div>
+              </div>
+              <div class="vs-item-note" style="color:var(--orange);">✓ You didn't lift a finger.</div>
+            </div>
+          </div>
+
+          <div class="vs-item">
+            <div class="vs-item-icon" style="background:rgba(233,115,75,.12);color:var(--orange);">🛡️</div>
+            <div class="vs-item-body">
+              <div class="vs-item-title" style="color:var(--black);">No-show? Your policy protects you.</div>
+              <div class="vs-item-desc" style="color:#3a3a3c;">Your cancellation policy is set once and enforced automatically. Payment was collected upfront. If they don't show — you already have it.</div>
+              <div class="vs-item-note" style="color:var(--orange);">✓ Your time has a price. VAMOS enforces it.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="alt" id="pricing">
+  <div class="wrap-wide">
+    <div class="reveal" style="text-align:center;">
+      <span class="tag">Pricing</span>
+      <h2 class="title center">Simple, transparent pricing.</h2>
+      <p class="sub center" style="margin-top:10px;">No hidden charges. You keep 100% of your session rate.</p>
+    </div>
+    <div class="pricing-toggle-wrap reveal">
+      <span>Monthly</span>
+      <button class="toggle-switch" id="billing-toggle" aria-label="Toggle annual billing">
+        <div class="toggle-knob"></div>
+      </button>
+      <span>Annual</span>
+      <span class="save-badge">Save 2 months</span>
+    </div>
+    <div class="price-grid reveal" id="price-grid">
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price"><span class="monthly-price">Free</span><span class="annual-price">Free</span></div>
+        <div class="plan-desc">Up to 5 bookings/month. QR payments. Basic calendar and profile.</div>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Pro</div>
+        <div class="plan-price"><span class="monthly-price">₱499<sub>/mo</sub></span><span class="annual-price">₱416<sub>/mo</sub></span></div>
+        <div class="plan-desc">Unlimited bookings, dashboard, client roster, automated reminders.</div>
+      </div>
+      <div class="plan pop">
+        <div class="pop-tag">Most Popular</div>
+        <div class="plan-name">Pro+</div>
+        <div class="plan-price"><span class="monthly-price">₱999<sub>/mo</sub></span><span class="annual-price">₱833<sub>/mo</sub></span></div>
+        <div class="plan-desc">Everything in Pro + automated payouts, no-show protection, instant payout.</div>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Academy</div>
+        <div class="plan-price"><span class="monthly-price">₱1,299<sub>/mo</sub></span><span class="annual-price">₱1,083<sub>/mo</sub></span></div>
+        <div class="plan-desc">Multi-coach accounts, venue management, priority support.</div>
+      </div>
+      <div class="plan found">
+        <div class="plan-name" style="color:var(--orange);">Founding Coach</div>
+        <div class="plan-price" style="color:var(--orange);"><span class="monthly-price">₱299<sub>/mo</sub></span><span class="annual-price">₱249<sub>/mo</sub></span></div>
+        <div class="plan-desc">Pro+ features. Rate locked 2 years. Zero platform cut, forever.</div>
+        <div class="plan-perk">🔒 20 spots only</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDING COACH -->
+<section id="founding" style="background:var(--white);">
+  <div class="wrap">
+    <div class="founding-box reveal">
+      <div class="founding-live"><span class="live-dot"></span>20 founding spots — limited availability</div>
+      <h2>Be a Founding Coach.<br/><span>Own your spot.</span></h2>
+      <p class="founding-sub">Rate locked at ₱299/mo for 2 years. Zero platform cut, forever.</p>
+      <div class="perk-row">
+        <div class="perk-card"><div class="perk-val">₱299<span style="font-size:14px;font-weight:500;color:rgba(255,255,255,.35)">/mo</span></div><div class="perk-title">Locked for 2 years</div><div class="perk-desc">Your rate stays at ₱299/mo for 2 full years — no matter what standard pricing becomes.</div></div>
+        <div class="perk-card"><div class="perk-val">0%</div><div class="perk-title">Platform cut — forever</div><div class="perk-desc">We never take a cut from your session fees. Every peso you earn goes directly to you.</div></div>
+        <div class="perk-card"><div class="perk-val">Day 1</div><div class="perk-title">Featured on Discover Coaches</div><div class="perk-desc">Your profile shown to all players from the moment VAMOS goes live.</div></div>
+        <div class="perk-card"><div class="perk-title">Launch marketing</div><div class="perk-desc">Featured in VAMOS launch posts across social media before public opening.</div></div>
+        <div class="perk-card"><div class="perk-title">Private founding group</div><div class="perk-desc">Connect with other founding coaches, share referrals, shape the product.</div></div>
+        <div class="perk-card"><div class="perk-title">1-on-1 with Christine</div><div class="perk-desc">Personal onboarding call with the founder before launch.</div></div>
+      </div>
+      <a href="coach-form.html" class="btn-primary" style="font-size:18px;padding:18px 44px;">Apply as Founding Coach ›</a>
+      <p style="margin-top:16px;font-size:14px;font-weight:500;color:rgba(255,255,255,.3);font-style:italic;">Free to ^§6. Takes 5 minutes. We respond within 1–2 business days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO JOIN -->
+<section id="how">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;">
+      <span class="tag">How to join</span>
+      <h2 class="title center">Three steps. Five minutes.</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal"><div class="step-num">1</div><h3>Fill in the questionnaire</h3><p>Tell us your sport, city, and how you currently manage bookings. Short and straightforward — about 5 minutes.</p></div>
+      <div class="step reveal"><div class="step-num">2</div><h3>We reach out</h3><p>Christine reaches out within 1–2 business days for a brief welcome call to confirm your spot.</p></div>
+      <div class="step reveal"><div class="step-num">3</div><h3>You're in</h3><p>You join the private Founding Coaches group and get full platform access when we launch.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="alt" id="faq">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;">
+      <span class="tag">FAQ</span>
+      <h2 class="title center">Questions coaches ask.</h2>
+    </div>
+    <div class="faq-list reveal">
+
+      <div class="faq-item">
+        <button class="faq-q">Do I need to register with Xendit or any payment gateway?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. VAMOS handles the payment integration entirely. You just enter your GCash number or bank account once during onboarding — that's it. You never create an account with Xendit or any other gateway. Payments go straight to your account automatically.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">When do I actually receive my money?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">The moment you confirm a booking, the held payment is released and sent to your GCash or bank. For automated payments via Xendit, the payout is processed immediately after confirmation. For QR payments, once you mark the payment as received, the session is tracked and logged in your dashboard.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What happens if a player doesn't show up?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">With automated payments, the player's payment is held from the moment they book. If they no-show and your cancellation policy applies, you keep the session fee — automatically, with no awkward conversation needed. You define your own cancellation policy during setup: how many hours before the session a player can cancel for free.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Do my players need to download an app?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. VAMOS works in any mobile browser — no download required for players. They tap your booking link, pick a slot, pay, and they're done. You can share your booking link on Instagram, Messenger, WhatsApp, or anywhere else you already communicate with them.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can I still use GCash even with Xendit enabled?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Xendit supports GCash, Maya, credit and debit cards, and bank transfers — so your players can pay with GCash through the automated flow. You can also keep your QR code as a fallback option and switch between payment modes anytime.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can I coach multiple sports on one profile?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. You can list multiple sports on your profile and set different session types, rates, and durations for each. Players see all your offerings in one place and book whichever session fits them.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can I set my own cancellation policy and session rates?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Completely. Your session rate is yours — VAMOS never takes a percentage of it. You also define your own cancellation window: for example, "free cancellation up to 24 hours before the session." Anything cancelled inside that window follows your policy automatically.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What happens after my 2-year founding rate?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">After 2 years, your subscription will move to the standard Pro+ pricing at the rate applicable at that time. However, the <strong>zero platform cut on your session fees remains forever</strong> — that benefit never expires for founding coaches, regardless of what plan you're on.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Is there a contract or lock-in period?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No contract, no lock-in. VAMOS is a monthly subscription — you can cancel anytime. The founding coach rate is locked for 2 years as long as you stay subscribed, but there is no penalty for leaving. We'd rather earn your loyalty than enforce it.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">How long does it take to set up my profile?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Most coaches complete their full profile in under 15 minutes. You add your sport, rate, courts, and availability — and your booking page is live. During the founding coach onboarding, Christine will set it up with you on a 1-on-1 call so you go live correctly from day one.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What if I already have existing clients on Messenger?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">You don't need to move everyone at once. Most founding coaches start by sharing their VAMOS link with new clients and migrating existing ones gradually. The QR code payment option also means clients who prefer the old way can still pay as they normally would — just with sessions tracked inside VAMOS.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta reveal">
+  <h2>Your clients deserve a smoother experience.<br/>So do you.</h2>
+  <p>Join VAMOS before the founding coach window closes.</p>
+  <a href="coach-form.html" class="btn-primary" style="font-size:18px;padding:18px 44px;">Apply Now — It's Free</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap-wide">
+    <div class="foot-top">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg width="20" height="20" viewBox="0 0 100 100"><polygon points="5,8 50,92 95,8 79,8 50,74 21,8" fill="#e9734b"/></svg>
+          <span class="foot-brand-name">VAMOS</span>
+        </div>
+        <div class="foot-tagline">Stop Chasing. Start Coaching.</div>
+      </div>
+      <div class="foot-col"><h4>Platform</h4><a href="#features">Features</a><a href="#payments">How payments work</a><a href="#pricing">Pricing</a></div>
+      <div class="foot-col"><h4>Founding Coach</h4><a href="#founding">About the program</a><a href="index.html">Apply now</a><a href="#how">How to join</a></div>
+      <div class="foot-col"><h4>Sports</h4><a href="#">Tennis · Badminton</a><a href="#">Pickleball · Padel</a><a href="#">Swimming · Diving</a><a href="#">Golf · Table Tennis</a></div>
+      <div class="foot-col"><h4>Support</h4><a href="#faq">FAQ</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="mailto:christine.s.bravo@gmail.com">Get in touch</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 VAMOS. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── SCROLL PROGRESS ───────────────────────────────────────────────
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+
+  // ── GRADIENT ORB (follows mouse in hero zone) ──────────────────
+  const orb = document.getElementById('hero-orb');
+  document.addEventListener('mousemove', (e) => {
+    orb.style.left = e.clientX + 'px';
+    orb.style.top  = e.clientY + 'px';
+  });
+
+
+  // ── MAGNETIC BUTTON ───────────────────────────────────────────
+  document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const r  = btn.getBoundingClientRect();
+      const dx = (e.clientX - r.left - r.width  / 2) * 0.25;
+      const dy = (e.clientY - r.top  - r.height / 2) * 0.25;
+      btn.style.transform = `translate(${dx}px, ${dy}px) scale(1.04)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+
+  // ── STAGGER CASCADE for pain cards, diff cards, feat items ────
+  const staggerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const siblings = entry.target.parentElement.querySelectorAll('.stagger-child');
+        siblings.forEach((el, i) => {
+          setTimeout(() => el.classList.add('in'), i * 90);
+        });
+        staggerObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  // observe first child of each stagger group
+  document.querySelectorAll('.pain-grid, .diff-grid, .feat-grid, .vs-items').forEach(grid => {
+    const first = grid.querySelector('.stagger-child, .diff-card, .feat-item, .vs-item');
+    if (first) staggerObserver.observe(first);
+  });
+
+  // ── STAT NUMBER POP ON ENTRY ──────────────────────────────────
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('stat-pop');
+        statObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-num').forEach(n => statObserver.observe(n));
+
+  // ── SCROLL REVEAL ─────────────────────────────────────────────────
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 55);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ── COUNTER ANIMATION ─────────────────────────────────────────────
+  const counters = document.querySelectorAll('[data-count]');
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const target = +e.target.dataset.count;
+        let current = 0;
+        const step = target / 40;
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          e.target.textContent = Math.round(current) + (target === 8 ? '+' : '');
+          if (current >= target) clearInterval(timer);
+        }, 30);
+        counterObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => counterObs.observe(el));
+
+  // ── ACTIVE NAV ────────────────────────────────────────────────────
+  const sections = document.querySelectorAll('section[id], div[id="demo"]');
+  const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+  const sectionMap = { features: 'features', payments: 'payments', pricing: 'pricing', founding: 'founding', how: 'how', demo: 'features' };
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.dataset.section === id || (id === 'demo' && a.dataset.section === 'features'));
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => navObs.observe(s));
+
+  // ── DEMO TABS ─────────────────────────────────────────────────────
+  document.querySelectorAll('.demo-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const idx = +tab.dataset.tab;
+      document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.demo-pane').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector(`.demo-pane[data-pane="${idx}"]`).classList.add('active');
+    });
+  });
+
+  // ── HAMBURGER MENU
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+  });
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // ── FAQ ACCORDION
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ── FEATURE TABS ──────────────────────────────────────────────────
+  document.querySelectorAll('.feat-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.feat-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.feat-item').forEach(item => {
+        const show = cat === 'all' || item.dataset.cat === cat;
+        item.classList.toggle('hidden', !show);
+      });
+    });
+  });
+
+  // ── TESTIMONIAL DOTS ──────────────────────────────────────────────
+  const testiRow = document.getElementById('testi-row');
+  let testiIdx = 0;
+  function setTesti(idx) {
+    testiIdx = idx;
+    const w = testiRow.parentElement.offsetWidth;
+    testiRow.style.transform = `translateX(-${idx * (w + 20)}px)`;
+    document.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+  document.querySelectorAll('.testi-dot').forEach(dot => {
+    dot.addEventListener('click', () => setTesti(+dot.dataset.dot));
+  });
+  // auto-advance on mobile only
+  window.addEventListener('resize', () => {
+    if (window.innerWidth < 900) {
+      if (!window._testiTimer) window._testiTimer = setInterval(() => setTesti((testiIdx + 1) % 3), 4000);
+    } else {
+      clearInterval(window._testiTimer); window._testiTimer = null;
+      testiRow.style.transform = '';
+    }
+  });
+
+  // ── PRICING TOGGLE ────────────────────────────────────────────────
+  const billingToggle = document.getElementById('billing-toggle');
+  const priceGrid = document.getElementById('price-grid');
+  billingToggle.addEventListener('click', () => {
+    billingToggle.classList.toggle('on');
+    priceGrid.classList.toggle('annual-mode');
+  });
+</script>
+</body>
+</html>

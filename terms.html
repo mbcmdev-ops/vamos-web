@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — VAMOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF5C00;
+    --black: #1d1d1f;
+    --grey: #6e6e73;
+    --light: #f5f5f7;
+    --rule: #d2d2d7;
+    --white: #fff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 500; color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 52px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .nav-logo { font-weight: 800; font-size: 17px; color: var(--black); text-decoration: none; letter-spacing: -0.3px; }
+  .nav-logo span { color: var(--orange); }
+  .nav-back { font-size: 14px; font-weight: 600; color: var(--grey); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .2s; }
+  .nav-back:hover { color: var(--black); }
+
+  /* HERO */
+  .legal-hero {
+    padding: 120px 48px 64px;
+    max-width: 800px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+  .legal-tag {
+    display: inline-block;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 16px;
+  }
+  .legal-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px; }
+  .legal-hero p { font-size: 16px; color: var(--grey); line-height: 1.7; }
+
+  /* CONTENT */
+  .legal-body {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 64px 48px 120px;
+  }
+  .legal-section { margin-bottom: 56px; }
+  .legal-section h2 {
+    font-size: 20px; font-weight: 700; letter-spacing: -0.3px;
+    margin-bottom: 16px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .legal-section h3 { font-size: 16px; font-weight: 700; margin: 24px 0 10px; }
+  .legal-section p { font-size: 15px; line-height: 1.8; color: #3a3a3c; margin-bottom: 14px; }
+  .legal-section ul { padding-left: 20px; margin-bottom: 14px; }
+  .legal-section ul li { font-size: 15px; line-height: 1.8; color: #3a3a3c; margin-bottom: 6px; }
+  .legal-section a { color: var(--orange); text-decoration: none; font-weight: 600; }
+  .legal-section a:hover { text-decoration: underline; }
+
+  .highlight-box {
+    background: var(--light);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    border-left: 3px solid var(--orange);
+  }
+  .highlight-box p { margin-bottom: 0; }
+
+  .founding-box {
+    background: var(--black);
+    border-radius: 16px;
+    padding: 28px 28px;
+    margin: 24px 0;
+  }
+  .founding-box h3 { color: #fff; font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+  .founding-box p { color: #aeaeb2; margin-bottom: 0; font-size: 15px; line-height: 1.75; }
+  .founding-box strong { color: var(--orange); }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: #fff;
+    padding: 40px 48px;
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: #86868b; }
+  footer a { color: #86868b; text-decoration: none; margin: 0 12px; }
+  footer a:hover { color: #fff; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 20px; }
+    .legal-hero { padding: 100px 20px 48px; }
+    .legal-body { padding: 48px 20px 80px; }
+    footer { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="vamos-landing.html">VA<span>MOS</span></a>
+  <a class="nav-back" href="vamos-landing.html">← Back to home</a>
+</nav>
+
+<div class="legal-hero">
+  <span class="legal-tag">Legal</span>
+  <h1>Terms of Service</h1>
+  <p>Effective date: July 2026 &nbsp;·&nbsp; Last updated: July 2026</p>
+</div>
+
+<div class="legal-body">
+
+  <div class="highlight-box">
+    <p>By using VAMOS as a coach or a player, you agree to these terms. Please read them carefully. If you have questions, reach us at <a href="mailto:hello@vamos.app">hello@vamos.app</a>.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>1. About VAMOS</h2>
+    <p>VAMOS is a sports coaching platform that enables professional coaches to list their services, accept bookings, and receive payments. Players use VAMOS to discover coaches, book sessions, and pay online.</p>
+    <p>VAMOS provides the technology platform. Coaches are independent professionals — not employees or contractors of VAMOS. The coaching session itself is a service provided directly by the coach to the player.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>2. Eligibility</h2>
+    <ul>
+      <li>You must be at least 18 years old to create an account</li>
+      <li>Coaches must provide accurate professional information and hold any required certifications for their sport and jurisdiction</li>
+      <li>Players under 18 must have parental or guardian consent</li>
+      <li>By registering, you confirm that the information you provide is accurate and complete</li>
+    </ul>
+  </div>
+
+  <div class="legal-section">
+    <h2>3. Coach Accounts</h2>
+
+    <h3>Responsibilities</h3>
+    <ul>
+      <li>Keep your profile information accurate and up to date</li>
+      <li>Honor bookings that you have confirmed</li>
+      <li>Maintain professional conduct with players at all times</li>
+      <li>Set and clearly communicate your cancellation policy on your profile</li>
+      <li>Comply with all applicable local laws and regulations relevant to coaching</li>
+    </ul>
+
+    <h3>Payments</h3>
+    <p>Coaches receive player payments through Xendit. You must register a Xendit account to receive payouts. VAMOS does not hold your funds — payments are processed and disbursed by Xendit according to their disbursement schedule.</p>
+
+    <h3>Platform Fees</h3>
+    <p>VAMOS charges no platform cut on session fees. You keep 100% of what you charge players. The only deductions are standard payment processing fees charged by Xendit (typically 1.5–2.5% depending on payment method).</p>
+
+    <div class="founding-box">
+      <h3>Founding Coach Agreement</h3>
+      <p>Coaches who join during the founding period receive a <strong>rate lock of ₱299/mo for 2 full years</strong> from their activation date. After the 2-year rate lock, the subscription price may change, but the <strong>0% platform cut on session fees is permanent and does not expire</strong>. This commitment is binding on VAMOS and will be honored regardless of future pricing changes to the platform.</p>
+    </div>
+  </div>
+
+  <div class="legal-section">
+    <h2>4. Player Accounts</h2>
+
+    <h3>Booking</h3>
+    <p>When you request a session with a coach, the booking is pending until the coach confirms. Once confirmed, you will receive a payment link. You must complete payment within the coach's stated payment window (typically 12–24 hours) to secure your slot. Unpaid bookings may be released at the coach's discretion.</p>
+
+    <h3>Payments</h3>
+    <p>Payments are processed via Xendit and may include credit/debit card, GCash, Maya, and other supported e-wallets and bank transfer methods. Xendit may charge a small payment processing fee depending on method.</p>
+
+    <h3>Cancellations and Refunds</h3>
+    <p>Each coach sets their own cancellation policy, visible on their booking page. VAMOS does not override individual coach policies. If a coach cancels a confirmed session, you are entitled to a full refund. For player-initiated cancellations, the coach's stated policy applies.</p>
+
+    <p>Refund disputes should first be raised with the coach directly. If unresolved, contact VAMOS at <a href="mailto:hello@vamos.app">hello@vamos.app</a> and we will mediate.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>5. Prohibited Conduct</h2>
+    <p>You may not use VAMOS to:</p>
+    <ul>
+      <li>Impersonate another person or misrepresent your credentials</li>
+      <li>Post false or misleading reviews</li>
+      <li>Circumvent the platform by arranging payments outside VAMOS to avoid using the booking system</li>
+      <li>Harass, threaten, or abuse other users</li>
+      <li>Violate any applicable laws or regulations</li>
+      <li>Attempt to gain unauthorized access to VAMOS systems</li>
+      <li>Use automated scripts or bots to interact with the platform</li>
+    </ul>
+    <p>Violations may result in suspension or permanent termination of your account.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>6. Content and Reviews</h2>
+    <p>Coaches may upload profile photos, bios, and session descriptions. Players may submit reviews of coaches after completed sessions. By submitting content, you grant VAMOS a non-exclusive license to display that content on the platform.</p>
+    <p>You retain ownership of content you submit. You are responsible for ensuring you have the rights to any content you upload. VAMOS reserves the right to remove content that violates these terms or our community standards.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>7. Subscriptions and Billing (Coaches)</h2>
+    <p>Coach subscriptions are billed monthly via the payment method on file. Subscriptions auto-renew unless cancelled. You may cancel at any time; your access continues until the end of the current billing period.</p>
+    <p>VAMOS may change subscription pricing with at least 30 days' notice. Founding coaches with a rate lock are exempt from price increases for the duration of their locked period as described in Section 3.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>8. Disclaimers and Limitation of Liability</h2>
+    <p>VAMOS is a technology platform. We do not certify, endorse, or guarantee the quality of any coach's services. Players book sessions at their own discretion.</p>
+    <p>To the extent permitted by law, VAMOS is not liable for any indirect, incidental, or consequential damages arising from use of the platform, including disputes between coaches and players, injury during sessions, or payment failures caused by third-party processors.</p>
+    <p>Our total liability to any user for any claim is limited to the amount paid by that user to VAMOS in the 3 months preceding the claim.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>9. Termination</h2>
+    <p>You may terminate your account at any time by contacting <a href="mailto:hello@vamos.app">hello@vamos.app</a>. VAMOS may suspend or terminate accounts that violate these terms, with or without notice depending on severity.</p>
+    <p>Upon termination, your public profile will be removed. Booking history and financial records will be retained as required by law (see Privacy Policy, Section 5).</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>10. Dispute Resolution</h2>
+    <p>In the event of a dispute between a coach and player, both parties should first attempt to resolve it directly. If unresolved, VAMOS will mediate in good faith. VAMOS's decision in mediation is advisory, not binding.</p>
+    <p>Disputes between a user and VAMOS shall be resolved by good-faith negotiation first. If not resolved within 30 days, disputes may proceed to binding arbitration under applicable law.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>11. Changes to These Terms</h2>
+    <p>We may update these Terms from time to time. We will notify you by email and/or an in-app notice at least 14 days before material changes take effect. Continued use of VAMOS after that date constitutes acceptance of the updated terms.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>12. Contact</h2>
+    <p>Questions about these terms? Contact us at:</p>
+    <p><a href="mailto:hello@vamos.app">hello@vamos.app</a></p>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="vamos-landing.html">Home</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+  </p>
+  <p style="margin-top:16px;">© 2026 VAMOS. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

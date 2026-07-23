@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — VAMOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF5C00;
+    --black: #1d1d1f;
+    --grey: #6e6e73;
+    --light: #f5f5f7;
+    --rule: #d2d2d7;
+    --white: #fff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 500; color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 52px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .nav-logo { font-weight: 800; font-size: 17px; color: var(--black); text-decoration: none; letter-spacing: -0.3px; }
+  .nav-logo span { color: var(--orange); }
+  .nav-back { font-size: 14px; font-weight: 600; color: var(--grey); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .2s; }
+  .nav-back:hover { color: var(--black); }
+
+  /* HERO */
+  .legal-hero {
+    padding: 120px 48px 64px;
+    max-width: 800px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+  .legal-tag {
+    display: inline-block;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 16px;
+  }
+  .legal-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px; }
+  .legal-hero p { font-size: 16px; color: var(--grey); line-height: 1.7; }
+
+  /* CONTENT */
+  .legal-body {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 64px 48px 120px;
+  }
+  .legal-section { margin-bottom: 56px; }
+  .legal-section h2 {
+    font-size: 20px; font-weight: 700; letter-spacing: -0.3px;
+    margin-bottom: 16px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .legal-section h3 { font-size: 16px; font-weight: 700; margin: 24px 0 10px; }
+  .legal-section p { font-size: 15px; line-height: 1.8; color: #3a3a3c; margin-bottom: 14px; }
+  .legal-section ul { padding-left: 20px; margin-bottom: 14px; }
+  .legal-section ul li { font-size: 15px; line-height: 1.8; color: #3a3a3c; margin-bottom: 6px; }
+  .legal-section a { color: var(--orange); text-decoration: none; font-weight: 600; }
+  .legal-section a:hover { text-decoration: underline; }
+
+  .highlight-box {
+    background: var(--light);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    border-left: 3px solid var(--orange);
+  }
+  .highlight-box p { margin-bottom: 0; }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: #fff;
+    padding: 40px 48px;
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: #86868b; }
+  footer a { color: #86868b; text-decoration: none; margin: 0 12px; }
+  footer a:hover { color: #fff; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 20px; }
+    .legal-hero { padding: 100px 20px 48px; }
+    .legal-body { padding: 48px 20px 80px; }
+    footer { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="vamos-landing.html">VA<span>MOS</span></a>
+  <a class="nav-back" href="vamos-landing.html">← Back to home</a>
+</nav>
+
+<div class="legal-hero">
+  <span class="legal-tag">Legal</span>
+  <h1>Privacy Policy</h1>
+  <p>Effective date: July 2026 &nbsp;·&nbsp; Last updated: July 2026</p>
+</div>
+
+<div class="legal-body">
+
+  <div class="highlight-box">
+    <p>Your privacy matters. VAMOS is built for professional coaches and the players who book with them. We collect only what we need to run the platform, we never sell your data, and we give you full control over your information.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>1. Who We Are</h2>
+    <p>VAMOS ("we," "us," or "our") is a sports coaching platform that connects coaches with players for session booking, payment, and scheduling. We operate as the data controller for information collected through our website, web application, and related services.</p>
+    <p>For questions about this policy, contact us at <a href="mailto:hello@vamos.app">hello@vamos.app</a>.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>2. Information We Collect</h2>
+
+    <h3>From Coaches</h3>
+    <ul>
+      <li>Full name, contact number, and email address</li>
+      <li>Sport specialization, coaching credentials, and bio</li>
+      <li>Profile photo (stored via Cloudinary)</li>
+      <li>Payment receiving details (processed and held by Xendit — we do not store your full banking credentials)</li>
+      <li>Session availability, pricing, and booking preferences</li>
+      <li>Cancellation policy settings</li>
+    </ul>
+
+    <h3>From Players</h3>
+    <ul>
+      <li>Full name and contact number (for booking confirmation via SMS)</li>
+      <li>Email address (optional, for receipts)</li>
+      <li>Session booking history with coaches you have booked</li>
+      <li>Payment transaction references (processed by Xendit)</li>
+    </ul>
+
+    <h3>Automatically Collected</h3>
+    <ul>
+      <li>Device type, browser, and operating system</li>
+      <li>Pages visited and features used (via PostHog analytics)</li>
+      <li>IP address and approximate location (country/region level)</li>
+      <li>Session timestamps and error logs</li>
+    </ul>
+  </div>
+
+  <div class="legal-section">
+    <h2>3. How We Use Your Information</h2>
+    <ul>
+      <li><strong>To operate the platform</strong> — process bookings, send confirmations, manage scheduling, and facilitate payments between coaches and players</li>
+      <li><strong>To communicate with you</strong> — send booking confirmations, reminders, and important account updates via SMS (Semaphore) or email (Resend)</li>
+      <li><strong>To process payments</strong> — pass transaction data to Xendit to facilitate coach payouts and player payments. Xendit is our licensed payment processor and handles card data, e-wallet data, and bank transfers directly</li>
+      <li><strong>To improve the platform</strong> — analyze aggregated usage data to understand how coaches and players use VAMOS and identify areas for improvement</li>
+      <li><strong>To prevent fraud</strong> — detect suspicious activity, verify accounts, and protect all users on the platform</li>
+    </ul>
+  </div>
+
+  <div class="legal-section">
+    <h2>4. Third-Party Services We Use</h2>
+    <p>We share data with trusted third-party providers only to the extent necessary to deliver our services:</p>
+
+    <h3>Xendit</h3>
+    <p>Payment processing. Xendit handles all payment transactions, including credit/debit cards, e-wallets (GCash, Maya), and bank transfers. Xendit is a licensed payment service provider. When you make or receive a payment, your financial data goes directly to Xendit under their privacy policy. We receive only transaction status references — never your full card or bank details.</p>
+
+    <h3>Supabase</h3>
+    <p>Authentication and database. Your account credentials and platform data are stored securely on Supabase-managed infrastructure.</p>
+
+    <h3>Cloudinary</h3>
+    <p>Media storage. Profile photos and session media are stored and served via Cloudinary. Images are accessible via URL once uploaded.</p>
+
+    <h3>Semaphore</h3>
+    <p>SMS notifications. Booking confirmations, reminders, and alerts are sent to your registered mobile number via Semaphore.</p>
+
+    <h3>Resend</h3>
+    <p>Email delivery. Transactional emails (receipts, confirmations) are sent via Resend.</p>
+
+    <h3>PostHog</h3>
+    <p>Product analytics. We use PostHog to understand how users navigate the platform. Data is anonymized and aggregated. No personal identifying information is shared with PostHog dashboards.</p>
+
+    <h3>Vercel</h3>
+    <p>Hosting. Our web application is hosted on Vercel. Standard server logs (IP, request timestamps) are processed by Vercel's infrastructure.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>5. Data Retention</h2>
+    <p>We retain your data for as long as your account is active or as needed to provide services. Specifically:</p>
+    <ul>
+      <li>Coach and player account data: retained while account is active, plus 2 years after deletion for legal and billing records</li>
+      <li>Booking records: 3 years from the booking date (for dispute resolution)</li>
+      <li>Payment transaction references: 7 years (legal/financial compliance)</li>
+      <li>Analytics data: 12 months, then aggregated and anonymized</li>
+    </ul>
+    <p>You may request deletion of your account at any time. See Section 7 for your data rights.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>6. Cookies and Tracking</h2>
+    <p>We use minimal cookies necessary to operate the platform:</p>
+    <ul>
+      <li><strong>Session cookies</strong> — keep you logged in during your session</li>
+      <li><strong>Analytics cookies</strong> — PostHog analytics to understand platform usage (you can opt out)</li>
+    </ul>
+    <p>We do not use advertising cookies or sell data to advertisers.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>7. Your Rights</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li><strong>Access</strong> — request a copy of all personal data we hold about you</li>
+      <li><strong>Correction</strong> — update inaccurate or incomplete information via your account settings</li>
+      <li><strong>Deletion</strong> — request account deletion and erasure of personal data (subject to retention obligations)</li>
+      <li><strong>Portability</strong> — receive your booking and account data in a machine-readable format</li>
+      <li><strong>Opt-out of analytics</strong> — disable PostHog tracking by contacting us</li>
+    </ul>
+    <p>To exercise any of these rights, email us at <a href="mailto:hello@vamos.app">hello@vamos.app</a>. We will respond within 14 business days.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>8. Children's Privacy</h2>
+    <p>VAMOS is not directed at children under 13. We do not knowingly collect personal information from anyone under 13. If you believe a minor has provided us with personal data, contact us immediately and we will delete it.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>9. Security</h2>
+    <p>We take reasonable technical and organizational measures to protect your data, including encrypted data transmission (HTTPS), access controls, and regular security reviews. No method of transmission over the internet is 100% secure, but we are committed to using industry-standard practices.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>10. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. When we make significant changes, we will notify you via email or an in-app notice at least 14 days before the change takes effect. Continued use of VAMOS after that date constitutes acceptance of the updated policy.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>11. Contact</h2>
+    <p>Questions, requests, or concerns? Reach us at:</p>
+    <p><a href="mailto:hello@vamos.app">hello@vamos.app</a></p>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="vamos-landing.html">Home</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+  </p>
+  <p style="margin-top:16px;">© 2026 VAMOS. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
