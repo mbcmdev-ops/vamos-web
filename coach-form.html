@@ -293,6 +293,33 @@
   .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 500px) { .row-2 { grid-template-columns: 1fr; } }
 
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    .site-header { padding: 0 16px; }
+    .site-header-inner { height: 52px; }
+    .nav-logo-crop { height: 38px; }
+    .nav-logo-img { height: 106px; margin-top: -40px; }
+
+    .progress-wrap { padding: 0 16px; }
+
+    .hero { padding: 36px 16px 32px; }
+    .hero h1 { letter-spacing: -.5px; }
+    .hero p { font-size: 14px; }
+    .hero-badge { font-size: 11px; padding: 5px 12px; }
+
+    .main { padding: 28px 16px 60px; }
+
+    .form-section { margin-bottom: 36px; }
+    .section-title { font-size: 18px; }
+
+    .submit-block { padding: 28px 20px; }
+    .submit-block h3 { font-size: 20px; }
+    .btn-submit { width: 100%; justify-content: center; padding: 15px 24px; }
+
+    .option { padding: 11px 12px; }
+    .option-text { font-size: 13px; }
+  }
+
   /* ── DIVIDER ── */
   .divider { border: none; border-top: 1px solid var(--rule); margin: 36px 0; }
 
@@ -345,6 +372,24 @@
     margin-top: 14px;
   }
 
+  /* ── VALIDATION ── */
+  .q-label .req { color: var(--orange); margin-left: 2px; }
+  .field-error input,
+  .field-error textarea,
+  .field-error select {
+    border-color: #c62828;
+    box-shadow: 0 0 0 3px rgba(198,40,40,0.12);
+  }
+  .field-error .options { outline: 2px solid #c62828; border-radius: var(--radius-sm); outline-offset: 2px; }
+  .error-msg {
+    font-size: 12px;
+    font-weight: 600;
+    color: #c62828;
+    margin-top: 5px;
+    display: none;
+  }
+  .field-error .error-msg { display: block; }
+
   /* ── TOAST ── */
   .toast {
     display: none;
@@ -369,10 +414,9 @@
   <div class="site-header-inner">
     <a href="/" style="text-decoration:none;">
       <div class="nav-logo-crop">
-        <img src="Vamos-Lockup-Black.svg" alt="ready Vamos" class="nav-logo-img">
+        <img src="assets/logos/Vamos-Lockup-Orange.svg" alt="ready Vamos" class="nav-logo-img">
       </div>
     </a>
-    <a href="/" class="nav-back">← Back to home</a>
   </div>
 </header>
 
@@ -401,22 +445,26 @@
     </div>
 
     <div class="row-2">
-      <div class="question">
-        <label class="q-label">First name</label>
-        <input type="text" placeholder="Maria" oninput="updateProgress()">
+      <div class="question" id="field-firstname">
+        <label class="q-label">First name<span class="req">*</span></label>
+        <input type="text" placeholder="Maria" oninput="updateProgress(); clearError('field-firstname')">
+        <div class="error-msg">Please enter your first name.</div>
       </div>
-      <div class="question">
-        <label class="q-label">Last name</label>
-        <input type="text" placeholder="Santos" oninput="updateProgress()">
+      <div class="question" id="field-lastname">
+        <label class="q-label">Last name<span class="req">*</span></label>
+        <input type="text" placeholder="Santos" oninput="updateProgress(); clearError('field-lastname')">
+        <div class="error-msg">Please enter your last name.</div>
       </div>
     </div>
-    <div class="question">
-      <label class="q-label">Email address</label>
-      <input type="email" placeholder="you@example.com" oninput="updateProgress()">
+    <div class="question" id="field-email">
+      <label class="q-label">Email address<span class="req">*</span></label>
+      <input type="email" placeholder="you@example.com" oninput="updateProgress(); clearError('field-email')">
+      <div class="error-msg">Please enter a valid email address.</div>
     </div>
-    <div class="question">
-      <label class="q-label">Mobile number</label>
-      <input type="text" placeholder="09XX XXX XXXX" oninput="updateProgress()">
+    <div class="question" id="field-mobile">
+      <label class="q-label">Mobile number<span class="req">*</span></label>
+      <input type="text" placeholder="09XX XXX XXXX" oninput="updateProgress(); clearError('field-mobile')">
+      <div class="error-msg">Please enter your mobile number.</div>
     </div>
     <div class="question">
       <label class="q-label">Where are you based?</label>
@@ -437,9 +485,10 @@
       <input type="text" placeholder="e.g. Peak Performance Coaching" oninput="updateProgress()">
     </div>
 
-    <div class="question">
-      <label class="q-label">Which sport do you coach?</label>
+    <div class="question" id="field-sport">
+      <label class="q-label">Which sport do you coach?<span class="req">*</span></label>
       <div class="q-hint">Select all that apply.</div>
+      <div class="error-msg" style="margin-bottom:6px;">Please select at least one sport.</div>
       <div class="options">
         <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Tennis</div></label>
         <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Badminton</div></label>
@@ -563,9 +612,10 @@
       <textarea placeholder="e.g. Automated GCash payments, a professional booking page I can share with clients, no more chasing payments manually..." oninput="updateProgress()"></textarea>
     </div>
 
-    <div class="question">
-      <label class="q-label">Would you want to be part of our founding coach group?</label>
+    <div class="question" id="field-founding">
+      <label class="q-label">Would you want to be part of our founding coach group?<span class="req">*</span></label>
       <div class="q-hint">Founding coaches get early access, a locked-in lower rate, and direct input on what gets built.</div>
+      <div class="error-msg" style="margin-bottom:6px;">Please select an option.</div>
       <div class="options">
         <label class="option"><input type="radio" name="founding" onchange="toggle(this)"><div class="option-text">Yes, I want to be a founding coach</div></label>
         <label class="option"><input type="radio" name="founding" onchange="toggle(this)"><div class="option-text">Maybe, I want to know more first</div></label>
@@ -611,22 +661,73 @@
     document.getElementById('progressLabel').textContent = pct + '% complete';
   }
 
+  function clearError(id) {
+    document.getElementById(id)?.classList.remove('field-error');
+  }
+
+  function validate() {
+    let valid = true;
+    let firstError = null;
+
+    function err(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.add('field-error');
+        if (!firstError) firstError = el;
+      }
+      valid = false;
+    }
+
+    // First name
+    const fname = document.querySelector('#field-firstname input');
+    if (!fname?.value.trim()) err('field-firstname');
+
+    // Last name
+    const lname = document.querySelector('#field-lastname input');
+    if (!lname?.value.trim()) err('field-lastname');
+
+    // Email
+    const email = document.querySelector('#field-email input');
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email?.value.trim());
+    if (!emailOk) err('field-email');
+
+    // Mobile
+    const mobile = document.querySelector('#field-mobile input');
+    if (!mobile?.value.trim()) err('field-mobile');
+
+    // Sport (at least one checkbox)
+    const sportChecked = document.querySelectorAll('#field-sport input:checked').length > 0;
+    if (!sportChecked) err('field-sport');
+
+    // Founding intent
+    const foundingChecked = document.querySelectorAll('#field-founding input:checked').length > 0;
+    if (!foundingChecked) err('field-founding');
+
+    if (firstError) {
+      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    return valid;
+  }
+
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgBqJlxjuwni4u-2BrZjKmjOl568XjUXUzpU_eY3y3Ot1ftkBiDZvvMuER2Q5wXFQ/exec';
 
   async function handleSubmit() {
+    if (!validate()) return;
+
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
     btn.textContent = 'Submitting...';
-    const data = { role: 'coach' };
 
+    const data = { role: 'coach' };
     document.querySelectorAll('.main input[type="text"], .main input[type="email"], .main input[type="number"], .main textarea').forEach((el, i) => {
       if (el.value.trim()) {
-        const lbl = el.closest('.question')?.querySelector('.q-label')?.textContent?.trim() || ('field_' + i);
+        const lbl = el.closest('.question')?.querySelector('.q-label')?.textContent?.trim().replace('*','') || ('field_' + i);
         data[lbl] = el.value.trim();
       }
     });
     document.querySelectorAll('.main input[type="radio"]:checked, .main input[type="checkbox"]:checked').forEach(el => {
-      const lbl = el.closest('.question')?.querySelector('.q-label')?.textContent?.trim() || el.name;
+      const lbl = el.closest('.question')?.querySelector('.q-label')?.textContent?.trim().replace('*','') || el.name;
       const val = el.closest('.option')?.querySelector('.option-text')?.childNodes[0]?.textContent?.trim() || '';
       data[lbl] = data[lbl] ? data[lbl] + ', ' + val : val;
     });
@@ -639,16 +740,15 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      toast.className = 'toast success';
-      toast.textContent = '✓ Application submitted. We will be in touch soon.';
+      window.location.href = '/thanks';
     } catch {
       toast.className = 'toast error';
       toast.textContent = 'Network error. Please check your connection and try again.';
+      toast.style.display = 'block';
+      setTimeout(() => toast.style.display = 'none', 4000);
       btn.disabled = false;
       btn.textContent = 'Submit Application →';
     }
-    toast.style.display = 'block';
-    setTimeout(() => toast.style.display = 'none', 4000);
   }
 </script>
 </body>

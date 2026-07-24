@@ -3,6 +3,7 @@
     { "source": "/", "destination": "/vamos-landing.html" },
     { "source": "/apply", "destination": "/coach-form.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/terms", "destination": "/terms.html" }
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/thanks", "destination": "/thanks.html" }
   ]
 }

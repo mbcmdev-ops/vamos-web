@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Received — ready Vamos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --orange:  #E9744B;
+    --orange-d:#c4562e;
+    --black:   #242021;
+    --grey:    #6e6e73;
+    --paper:   #FFF8F6;
+    --peach:   #FDEFE9;
+    --rule:    #e8d8d0;
+    --green:   #3a7d44;
+    --green-l: #e8f5eb;
+    --font-display: 'Special Gothic Expanded One', sans-serif;
+    --font-body:    'Inter', sans-serif;
+  }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--black);
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    background: rgba(255,248,246,0.92);
+    border-bottom: 1px solid var(--rule);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    padding: 0 40px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+  }
+  .nav-logo-crop { height: 48px; overflow: hidden; display: flex; align-items: flex-start; }
+  .nav-logo-img  { height: 133px; width: auto; display: block; margin-top: -51px; }
+
+  /* MAIN */
+  .page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px 80px;
+    text-align: center;
+  }
+
+  /* CHECK ICON */
+  .check-wrap {
+    width: 72px; height: 72px;
+    background: var(--green-l);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+  }
+  .check-wrap svg { width: 32px; height: 32px; }
+
+  /* HEADLINE */
+  .tag {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 400;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 16px;
+    max-width: 560px;
+  }
+  .sub {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--grey);
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 0 auto 40px;
+  }
+
+  /* STEPS */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto 40px;
+    text-align: left;
+  }
+  .step {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    background: var(--peach);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800;
+    color: var(--orange);
+    flex-shrink: 0;
+  }
+  .step-text h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .step-text p  { font-size: 13px; font-weight: 500; color: var(--grey); line-height: 1.5; }
+
+  /* CTA */
+  .btn-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--black);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 980px;
+    padding: 13px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    transition: background .15s;
+  }
+  .btn-home:hover { background: #3a3535; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--grey);
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 16px; }
+    .nav-logo-crop { height: 38px; }
+    .nav-logo-img  { height: 106px; margin-top: -40px; }
+    .page { padding: 48px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" style="text-decoration:none;">
+    <div class="nav-logo-crop">
+      <img src="assets/logos/Vamos-Lockup-Orange.svg" alt="ready Vamos" class="nav-logo-img">
+    </div>
+  </a>
+</nav>
+
+<div class="page">
+
+  <div class="check-wrap">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 16L13 23L26 9" stroke="#3a7d44" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div class="tag">Application received</div>
+  <h1>You're on the list.</h1>
+  <p class="sub">Thanks for applying to be a Vamos founding coach. Our team will review your application and be in touch within 1 to 2 business days.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <h4>We review your application</h4>
+        <p>Our team reads every submission personally.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <h4>We reach out within 1–2 days</h4>
+        <p>Check your email — we'll send next steps from there.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <h4>You get early access</h4>
+        <p>Founding coaches get first access, a locked rate, and direct input on what gets built.</p>
+      </div>
+    </div>
+  </div>
+
+  <a href="/" class="btn-home">← Back to home</a>
+
+</div>
+
+<footer>
+  © 2026 ready Vamos · All rights reserved
+</footer>
+
+</body>
+</html>
