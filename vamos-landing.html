@@ -6,24 +6,28 @@
   <title>VAMOS — Stop Chasing. Start Coaching.</title>
   <meta name="description" content="Bookings, payments, and reminders — built specifically for sports coaches."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Special+Gothic+Expanded+One&family=Caveat:wght@700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --orange:  #e9734b;
+      --orange:  #E9744B;
       --orange-d:#c4562e;
-      --black:   #1d1d1f;
-      --dark:    #000000;
+      --black:   #242021;
+      --dark:    #242021;
       --grey:    #6e6e73;
       --mid:     #86868b;
-      --light:   #f5f5f7;
-      --rule:    #d2d2d7;
-      --white:   #ffffff;
+      --light:   #FDEFE9;
+      --paper:   #FFF8F6;
+      --rule:    #e8d8d0;
+      --white:   #FFF8F6;
+      --font-display: 'Special Gothic Expanded One', sans-serif;
+      --font-script: 'Caveat', cursive;
     }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--black); background: var(--white);
+      color: var(--black); background: var(--paper);
       -webkit-font-smoothing: antialiased; overflow-x: hidden;
     }
 
@@ -38,13 +42,14 @@
       position: fixed; top: 2px; left: 0; right: 0; z-index: 900;
       height: 52px; display: flex; align-items: center;
       padding: 0 40px; justify-content: space-between;
-      background: rgba(255,255,255,0.82);
+      background: rgba(255,248,246,0.88);
       backdrop-filter: saturate(180%) blur(24px);
       -webkit-backdrop-filter: saturate(180%) blur(24px);
-      border-bottom: 1px solid rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(233,116,75,0.12);
     }
     .nav-brand { display: flex; align-items: center; gap: 9px; text-decoration: none; }
-    .nav-wordmark { font-weight: 800; font-size: 16px; letter-spacing: 3px; color: var(--black); }
+    .nav-logo-crop { height: 48px; overflow: hidden; display: flex; align-items: flex-start; flex-shrink: 0; }
+    .nav-logo-img { height: 133px; width: auto; display: block; margin-top: -51px; flex-shrink: 0; }
     .nav-links { display: flex; gap: 28px; }
     .nav-links a {
       font-size: 14px; font-weight: 500; color: var(--black);
@@ -79,8 +84,9 @@
     .hero-tag strong { color: var(--black); font-weight: 700; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
     h1.hero-title {
-      font-size: clamp(54px, 9vw, 108px);
-      font-weight: 900; line-height: .98; letter-spacing: -4px;
+      font-family: var(--font-display);
+      font-size: clamp(48px, 8vw, 100px);
+      font-weight: 400; line-height: 1; letter-spacing: -2px;
       color: var(--black); margin-bottom: 28px;
     }
     h1.hero-title em { font-style: normal; color: var(--orange); }
@@ -128,11 +134,11 @@
     /* ── SECTION BASE ─────────────────────────────────────────────── */
     section { padding: 96px 40px; }
     section.alt { background: var(--light); }
-    section.dark { background: var(--dark); }
+    section.dark { background: var(--black); }
     .wrap { max-width: 960px; margin: 0 auto; }
     .wrap-wide { max-width: 1180px; margin: 0 auto; }
     .tag { display: block; font-size: 12px; font-weight: 800; color: var(--orange); letter-spacing: 1px; margin-bottom: 10px; text-transform: uppercase; }
-    h2.title { font-size: clamp(32px, 4.8vw, 56px); font-weight: 800; letter-spacing: -2px; line-height: 1.05; margin-bottom: 14px; }
+    h2.title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 52px); font-weight: 400; letter-spacing: -1px; line-height: 1.05; margin-bottom: 14px; }
     h2.title.center { text-align: center; }
     h2.title.light { color: #fff; }
     .sub { font-size: 17px; font-weight: 500; color: var(--grey); line-height: 1.7; max-width: 540px; }
@@ -140,7 +146,7 @@
     .sub.light { color: rgba(255,255,255,0.55); }
 
     /* ── STATEMENT ────────────────────────────────────────────────── */
-    .statement-section { background: var(--dark); padding: 96px 40px; text-align: center; }
+    .statement-section { background: var(--black); padding: 96px 40px; text-align: center; }
     .statement-section p {
       font-size: clamp(22px, 3.2vw, 38px); font-weight: 500; line-height: 1.55;
       color: rgba(255,255,255,0.45); max-width: 820px; margin: 0 auto; letter-spacing: -.4px;
@@ -156,10 +162,10 @@
       overflow: hidden; margin-top: 60px;
     }
     .pain-card {
-      background: #fff; padding: 40px 32px;
+      background: var(--paper); padding: 40px 32px;
       transition: background .2s; cursor: default;
     }
-    .pain-card:hover { background: #fafafa; }
+    .pain-card:hover { background: #fff; }
     .pain-n { font-size: 11px; font-weight: 800; color: var(--orange); letter-spacing: 1.5px; margin-bottom: 18px; display: block; text-transform: uppercase; }
     .pain-card h3 { font-size: 18px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 10px; line-height: 1.3; }
     .pain-card p { font-size: 15px; font-weight: 500; color: var(--grey); line-height: 1.65; }
@@ -179,8 +185,8 @@
       50%       { transform: translateY(-8px); box-shadow: 0 24px 56px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.07), inset 0 1px 0 #fff; }
     }
     .mock {
-      border: 1px solid rgba(0,0,0,0.07); border-radius: 16px;
-      padding: 22px 24px; background: #fff;
+      border: 1px solid rgba(233,116,75,0.15); border-radius: 16px;
+      padding: 22px 24px; background: var(--paper);
       animation: cardFloat 4s ease-in-out infinite;
       transition: transform .25s ease, box-shadow .25s ease;
       cursor: default;
@@ -244,7 +250,7 @@
     .testi-track { position: relative; overflow: hidden; margin-top: 60px; }
     .testi-row { display: flex; gap: 20px; transition: transform .45s cubic-bezier(.4,0,.2,1); }
     .testi {
-      background: #fff; border: 1px solid var(--rule); border-radius: 20px;
+      background: var(--paper); border: 1px solid var(--rule); border-radius: 20px;
       padding: 36px 32px; flex: 0 0 calc(33.333% - 14px); min-width: 0;
       transition: box-shadow .2s;
     }
@@ -291,7 +297,7 @@
     .save-badge { background: #e8f5e9; color: #2e7d32; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 980px; }
 
     .price-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-top: 40px; align-items: end; }
-    .plan { border: 1px solid var(--rule); border-radius: 20px; padding: 28px 20px; background: #fff; position: relative; transition: box-shadow .2s; }
+    .plan { border: 1px solid var(--rule); border-radius: 20px; padding: 28px 20px; background: var(--paper); position: relative; transition: box-shadow .2s; }
     .plan:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.07); }
     .plan.pop { border: 2px solid var(--orange); transform: scale(1.04); z-index: 1; }
     .plan.found { border-color: var(--orange); background: #fffaf8; }
@@ -307,7 +313,7 @@
 
     /* ── FOUNDING ─────────────────────────────────────────────────── */
     .founding-box {
-      background: var(--dark); border-radius: 28px;
+      background: var(--black); border-radius: 28px;
       padding: 88px 80px; text-align: center; max-width: 960px; margin: 0 auto;
     }
     .founding-live { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 980px; padding: 8px 20px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,.65); margin-bottom: 28px; }
@@ -425,20 +431,20 @@
     .step p { font-size: 15px; font-weight: 500; color: var(--grey); line-height: 1.65; }
 
     /* ── FINAL CTA ────────────────────────────────────────────────── */
-    .final-cta { padding: 100px 40px; text-align: center; background: var(--light); border-top: 1px solid var(--rule); }
-    .final-cta h2 { font-size: clamp(32px,5vw,60px); font-weight: 900; letter-spacing: -2px; margin-bottom: 14px; line-height: 1.05; }
+    .final-cta { padding: 100px 40px; text-align: center; background: var(--paper); border-top: 1px solid var(--rule); }
+    .final-cta h2 { font-family: var(--font-display); font-size: clamp(28px,4.5vw,56px); font-weight: 400; letter-spacing: -1px; margin-bottom: 14px; line-height: 1.05; }
     .final-cta p { font-size: 18px; font-weight: 500; color: var(--grey); margin-bottom: 36px; }
 
     /* ── FOOTER ───────────────────────────────────────────────────── */
-    footer { background: var(--light); border-top: 1px solid var(--rule); padding: 52px 40px 32px; }
+    footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.06); padding: 52px 40px 32px; }
     .foot-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 36px; margin-bottom: 48px; }
-    .foot-brand-name { font-weight: 800; font-size: 15px; letter-spacing: 2.5px; margin-top: 8px; }
-    .foot-tagline { font-size: 13px; font-weight: 500; color: var(--grey); margin-top: 6px; font-style: italic; }
-    .foot-col h4 { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--black); margin-bottom: 14px; }
-    .foot-col a { display: block; font-size: 14px; font-weight: 500; color: var(--grey); text-decoration: none; margin-bottom: 9px; transition: color .15s; }
+    .foot-brand-name { font-family: var(--font-script); font-size: 26px; font-weight: 700; color: #fff; margin-top: 4px; }
+    .foot-tagline { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.4); margin-top: 6px; }
+    .foot-col h4 { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .foot-col a { display: block; font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.55); text-decoration: none; margin-bottom: 9px; transition: color .15s; }
     .foot-col a:hover { color: var(--orange); }
-    .foot-bottom { border-top: 1px solid var(--rule); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-    .foot-bottom span { font-size: 13px; font-weight: 500; color: var(--grey); }
+    .foot-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .foot-bottom span { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.3); }
     .foot-bottom a { color: var(--orange); text-decoration: none; font-size: 13px; font-weight: 500; }
 
     /* ── REVEAL ───────────────────────────────────────────────────── */
@@ -661,8 +667,9 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-brand">
-    <svg width="22" height="22" viewBox="0 0 100 100"><polygon points="5,8 50,92 95,8 79,8 50,74 21,8" fill="#e9734b"/></svg>
-    <span class="nav-wordmark">VAMOS</span>
+    <div class="nav-logo-crop">
+      <img src="Vamos-Lockup-Black.svg" alt="ready Vamos" class="nav-logo-img">
+    </div>
   </a>
   <div class="nav-links">
     <a href="#features" data-section="features">Features</a>
@@ -1278,11 +1285,8 @@
   <div class="wrap-wide">
     <div class="foot-top">
       <div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <svg width="20" height="20" viewBox="0 0 100 100"><polygon points="5,8 50,92 95,8 79,8 50,74 21,8" fill="#e9734b"/></svg>
-          <span class="foot-brand-name">VAMOS</span>
-        </div>
-        <div class="foot-tagline">Stop Chasing. Start Coaching.</div>
+        <img src="Vamos-Mark-White.svg" alt="Vamos" style="height:36px;width:auto;display:block;margin-bottom:4px;">
+        <div class="foot-tagline">Stop chasing. Start coaching.</div>
       </div>
       <div class="foot-col"><h4>Platform</h4><a href="#features">Features</a><a href="#payments">How payments work</a><a href="#pricing">Pricing</a></div>
       <div class="foot-col"><h4>Founding Coach</h4><a href="#founding">About the program</a><a href="index.html">Apply now</a><a href="#how">How to join</a></div>

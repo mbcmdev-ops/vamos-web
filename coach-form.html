@@ -1,145 +1,96 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VAMOS — Sports Coaching Platform</title>
+<title>Apply as a Founding Coach — ready Vamos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=SF+Pro+Display:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ── LIGHT (Apple.com) ── */
   :root {
-    --bg: #ffffff;
-    --bg-2: #F5F5F7;
-    --surface: #ffffff;
-    --surface-2: #F5F5F7;
-    --border: #D2D2D7;
-    --border-2: #E8E8ED;
-    --ink: #1D1D1F;
-    --ink-2: #424245;
-    --ink-3: #6E6E73;
-    --ink-4: #A1A1A6;
-    --accent: #007AFF;
-    --accent-bg: #E8F0FE;
-    --accent-border: #B3CCFF;
-    --success: #34C759;
-    --error: #FF3B30;
-    --radius: 12px;
-    --radius-sm: 8px;
-    --max: 680px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
-  }
-
-  /* ── DARK (iOS dark) ── */
-  [data-theme="dark"] {
-    --bg: #000000;
-    --bg-2: #1C1C1E;
-    --surface: #1C1C1E;
-    --surface-2: #2C2C2E;
-    --border: #38383A;
-    --border-2: #48484A;
-    --ink: #F5F5F7;
-    --ink-2: #EBEBF5CC;
-    --ink-3: #EBEBF599;
-    --ink-4: #EBEBF54D;
-    --accent: #0A84FF;
-    --accent-bg: #0A84FF18;
-    --accent-border: #0A84FF44;
-    --success: #30D158;
-    --error: #FF453A;
-    --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3);
+    --orange:        #E9744B;
+    --orange-d:      #c4562e;
+    --orange-l:      #FDEFE9;
+    --black:         #242021;
+    --grey:          #6e6e73;
+    --mid:           #86868b;
+    --paper:         #FFF8F6;
+    --peach:         #FDEFE9;
+    --rule:          #e8d8d0;
+    --green:         #3a7d44;
+    --green-l:       #e8f5eb;
+    --error:         #c62828;
+    --font-display:  'Special Gothic Expanded One', sans-serif;
+    --font-body:     'Inter', sans-serif;
+    --max:           680px;
+    --radius:        14px;
+    --radius-sm:     10px;
   }
 
   html { font-size: 16px; }
 
   body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: -apple-system, 'Inter', BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    background: var(--paper);
+    color: var(--black);
+    font-family: var(--font-body);
     font-weight: 400;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    transition: background 0.3s ease, color 0.3s ease;
   }
 
-  /* ── HEADER ── */
+  /* ── NAV ── */
   .site-header {
-    background: var(--bg);
-    border-bottom: 1px solid var(--border-2);
+    background: rgba(255,248,246,0.92);
+    border-bottom: 1px solid var(--rule);
     padding: 0 24px;
     position: sticky;
     top: 0;
     z-index: 30;
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    background: rgba(255,255,255,0.72);
-    transition: background 0.3s;
-  }
-  [data-theme="dark"] .site-header {
-    background: rgba(28,28,30,0.72);
   }
   .site-header-inner {
     max-width: var(--max);
     margin: 0 auto;
-    height: 52px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  .logo {
-    font-family: -apple-system, 'Inter', BlinkMacSystemFont, sans-serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: -0.02em;
+  .nav-logo-crop {
+    height: 48px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
   }
-  .logo span { color: var(--accent); }
-
-  /* ── THEME TOGGLE ── */
-  .theme-toggle {
+  .nav-logo-img {
+    height: 133px;
+    width: auto;
+    display: block;
+    margin-top: -51px;
+    flex-shrink: 0;
+  }
+  .nav-back {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--grey);
+    text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    border: none;
-    background: none;
-    padding: 0;
+    gap: 5px;
+    transition: color .15s;
   }
-  .toggle-track {
-    width: 44px;
-    height: 26px;
-    background: var(--border);
-    border-radius: 13px;
-    position: relative;
-    transition: background 0.25s;
-  }
-  [data-theme="dark"] .toggle-track { background: var(--accent); }
-  .toggle-thumb {
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
-    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
-  }
-  [data-theme="dark"] .toggle-thumb { transform: translateX(18px); }
-  .toggle-icon {
-    font-size: 15px;
-    transition: opacity 0.2s;
-    user-select: none;
-  }
+  .nav-back:hover { color: var(--orange); }
 
   /* ── PROGRESS ── */
   .progress-wrap {
-    background: var(--bg-2);
-    border-bottom: 1px solid var(--border-2);
+    background: var(--peach);
+    border-bottom: 1px solid var(--rule);
     padding: 0 24px;
-    transition: background 0.3s;
   }
   .progress-inner {
     max-width: var(--max);
@@ -152,57 +103,78 @@
   .progress-track {
     flex: 1;
     height: 4px;
-    background: var(--border-2);
+    background: var(--rule);
     border-radius: 4px;
     overflow: hidden;
   }
   .progress-fill {
     height: 100%;
     width: 0%;
-    background: var(--accent);
+    background: var(--orange);
     border-radius: 4px;
     transition: width 0.35s ease;
   }
   .progress-label {
     font-size: 12px;
-    font-weight: 500;
-    color: var(--ink-3);
+    font-weight: 600;
+    color: var(--grey);
     min-width: 76px;
     text-align: right;
   }
 
   /* ── HERO ── */
   .hero {
-    background: var(--bg-2);
-    border-bottom: 1px solid var(--border-2);
+    background: var(--black);
     padding: 52px 24px 44px;
-    transition: background 0.3s;
   }
   .hero-inner { max-width: var(--max); margin: 0 auto; }
   .eyebrow {
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-weight: 800;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 10px;
-  }
-  .hero h1 {
-    font-size: clamp(28px, 5vw, 36px);
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1.15;
-    letter-spacing: -0.03em;
+    color: var(--orange);
     margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 5vw, 38px);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 14px;
   }
   .hero p {
     font-size: 15px;
-    color: var(--ink-3);
+    color: rgba(255,255,255,.5);
     max-width: 500px;
-    line-height: 1.6;
+    line-height: 1.7;
   }
-
-
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(233,116,75,.12);
+    border: 1px solid rgba(233,116,75,.3);
+    color: var(--orange);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 980px;
+    margin-bottom: 20px;
+    letter-spacing: .3px;
+  }
 
   /* ── MAIN ── */
   .main {
@@ -216,21 +188,22 @@
   .section-header {
     margin-bottom: 20px;
     padding-bottom: 14px;
-    border-bottom: 1px solid var(--border-2);
+    border-bottom: 1px solid var(--rule);
   }
   .section-eyebrow {
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--ink-4);
-    margin-bottom: 3px;
+    letter-spacing: 1.2px;
+    color: var(--orange);
+    margin-bottom: 4px;
   }
   .section-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: -0.02em;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--black);
+    letter-spacing: -.5px;
   }
 
   /* ── QUESTION ── */
@@ -238,14 +211,14 @@
   .q-label {
     display: block;
     font-size: 14px;
-    font-weight: 500;
-    color: var(--ink);
+    font-weight: 600;
+    color: var(--black);
     margin-bottom: 5px;
     line-height: 1.45;
   }
   .q-hint {
     font-size: 12.5px;
-    color: var(--ink-4);
+    color: var(--mid);
     margin-bottom: 10px;
   }
 
@@ -257,29 +230,29 @@
   select {
     width: 100%;
     padding: 11px 14px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--rule);
     border-radius: var(--radius-sm);
-    background: var(--surface);
-    color: var(--ink);
-    font-family: inherit;
+    background: #fff;
+    color: var(--black);
+    font-family: var(--font-body);
     font-size: 15px;
     line-height: 1.5;
     outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s, background 0.3s;
+    transition: border-color 0.15s, box-shadow 0.15s;
     appearance: none;
     -webkit-appearance: none;
   }
   input[type="text"]::placeholder,
   input[type="email"]::placeholder,
   input[type="number"]::placeholder,
-  textarea::placeholder { color: var(--ink-4); }
+  textarea::placeholder { color: var(--mid); }
   input[type="text"]:focus,
   input[type="email"]:focus,
   input[type="number"]:focus,
   textarea:focus,
   select:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-border);
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(233,116,75,0.18);
   }
   textarea { resize: vertical; min-height: 88px; }
   select {
@@ -290,80 +263,85 @@
     cursor: pointer;
   }
 
-  /* ── OPTION ROWS ── */
+  /* ── OPTIONS ── */
   .options { display: flex; flex-direction: column; gap: 7px; }
   .option {
     display: flex;
     align-items: flex-start;
     gap: 12px;
     padding: 12px 14px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--rule);
     border-radius: var(--radius-sm);
     cursor: pointer;
-    background: var(--surface);
+    background: #fff;
     transition: border-color 0.15s, background 0.15s;
   }
-  .option:hover { border-color: var(--accent); background: var(--accent-bg); }
-  .option.selected { border-color: var(--accent); background: var(--accent-bg); }
+  .option:hover { border-color: var(--orange); background: var(--peach); }
+  .option.selected { border-color: var(--orange); background: var(--peach); }
   .option input[type="radio"],
   .option input[type="checkbox"] {
     width: 17px; height: 17px;
     margin-top: 1px;
-    accent-color: var(--accent);
+    accent-color: var(--orange);
     flex-shrink: 0;
     cursor: pointer;
   }
-  .option-text { font-size: 14px; color: var(--ink-2); line-height: 1.45; }
-  .option-sub { display: block; font-size: 12px; color: var(--ink-4); margin-top: 2px; }
+  .option-text { font-size: 14px; color: var(--black); line-height: 1.45; font-weight: 500; }
+  .option-sub { display: block; font-size: 12px; color: var(--grey); margin-top: 2px; font-weight: 400; }
 
   /* ── GRID ── */
   .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 500px) { .row-2 { grid-template-columns: 1fr; } }
 
   /* ── DIVIDER ── */
-  .divider { border: none; border-top: 1px solid var(--border-2); margin: 36px 0; }
+  .divider { border: none; border-top: 1px solid var(--rule); margin: 36px 0; }
 
   /* ── SUBMIT ── */
   .submit-block {
-    background: var(--surface);
-    border: 1px solid var(--border-2);
+    background: var(--black);
     border-radius: var(--radius);
-    padding: 36px 32px;
+    padding: 40px 32px;
     text-align: center;
-    box-shadow: var(--shadow);
-    transition: background 0.3s;
+  }
+  .submit-block h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: -.5px;
+    margin-bottom: 10px;
   }
   .submit-block p {
     font-size: 14px;
-    color: var(--ink-3);
-    margin-bottom: 20px;
+    color: rgba(255,255,255,.45);
+    margin-bottom: 24px;
     max-width: 380px;
     margin-left: auto;
     margin-right: auto;
-    line-height: 1.6;
+    line-height: 1.65;
   }
   .btn-submit {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--accent);
+    background: var(--orange);
     color: #fff;
     border: none;
     border-radius: 980px;
-    padding: 13px 32px;
-    font-family: inherit;
+    padding: 14px 36px;
+    font-family: var(--font-body);
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    letter-spacing: -0.01em;
-    transition: opacity 0.15s, transform 0.1s;
+    letter-spacing: -.01em;
+    transition: background 0.15s, transform 0.1s;
   }
-  .btn-submit:hover { opacity: 0.88; }
+  .btn-submit:hover { background: var(--orange-d); }
   .btn-submit:active { transform: scale(0.98); }
   .btn-submit:disabled { opacity: 0.45; cursor: not-allowed; }
   .privacy {
     font-size: 12px;
-    color: var(--ink-4);
+    color: rgba(255,255,255,.25);
     margin-top: 14px;
   }
 
@@ -376,26 +354,25 @@
     padding: 13px 22px;
     border-radius: 980px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     z-index: 100;
     box-shadow: 0 4px 24px rgba(0,0,0,0.2);
     white-space: nowrap;
   }
-  .toast.success { background: var(--success); color: #fff; }
-  .toast.error { background: var(--error); color: #fff; }
-  .toast.neutral { background: var(--ink); color: var(--bg); }
+  .toast.success { background: var(--green); color: #fff; }
+  .toast.error   { background: var(--error); color: #fff; }
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="site-header-inner">
-    <div class="logo">VAMOS</div>
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-      <span class="toggle-icon" id="themeIconLeft">☀️</span>
-      <div class="toggle-track"><div class="toggle-thumb"></div></div>
-      <span class="toggle-icon" id="themeIconRight">🌙</span>
-    </button>
+    <a href="/" style="text-decoration:none;">
+      <div class="nav-logo-crop">
+        <img src="Vamos-Lockup-Black.svg" alt="ready Vamos" class="nav-logo-img">
+      </div>
+    </a>
+    <a href="/" class="nav-back">← Back to home</a>
   </div>
 </header>
 
@@ -408,10 +385,9 @@
 
 <section class="hero">
   <div class="hero-inner">
-    <div class="eyebrow">VAMOS — Sports Coaching Platform</div>
+    <div class="hero-badge"><span class="eyebrow-dot"></span> Founding Coach Application</div>
     <h1>Let's get you set up.</h1>
-    <p>Tell us about your sports coaching practice. VAMOS is built for Tennis, Badminton, Table Tennis, Pickleball, Golf, Swimming, Diving, and Padel coaches in the Philippines.</p>
-
+    <p>Tell us about your sports coaching practice. Vamos is built for Tennis, Badminton, Table Tennis, Pickleball, Golf, Swimming, Diving, and Padel coaches in the Philippines.</p>
   </div>
 </section>
 
@@ -449,162 +425,160 @@
   </div>
 
   <!-- COACH SECTION -->
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-eyebrow">Section 2 — Coach</div>
-        <div class="section-title">Your Coaching Practice</div>
-      </div>
+  <div class="form-section">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 2 — Coach</div>
+      <div class="section-title">Your Coaching Practice</div>
+    </div>
 
-      <div class="question">
-        <label class="q-label">Coaching business or practice name</label>
-        <div class="q-hint">Leave blank if you go by your personal name.</div>
-        <input type="text" placeholder="e.g. Peak Performance Coaching" oninput="updateProgress()">
-      </div>
+    <div class="question">
+      <label class="q-label">Coaching business or practice name</label>
+      <div class="q-hint">Leave blank if you go by your personal name.</div>
+      <input type="text" placeholder="e.g. Peak Performance Coaching" oninput="updateProgress()">
+    </div>
 
-      <div class="question">
-        <label class="q-label">Which sport do you coach?</label>
-        <div class="q-hint">Select all that apply.</div>
-        <div class="options">
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Tennis</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Badminton</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Table Tennis</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Pickleball</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Golf</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Swimming</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Diving</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Padel</div></label>
-        </div>
-      </div>
-
-      <div class="question">
-        <label class="q-label">How many active clients do you currently handle?</label>
-        <div class="options">
-          <label class="option"><input type="radio" name="clientCount" onchange="toggle(this)"><div class="option-text">Less than 10</div></label>
-          <label class="option"><input type="radio" name="clientCount" onchange="toggle(this)"><div class="option-text">10 to 30</div></label>
-          <label class="option"><input type="radio" name="clientCount" onchange="toggle(this)"><div class="option-text">30 to 60</div></label>
-          <label class="option"><input type="radio" name="clientCount" onchange="toggle(this)"><div class="option-text">More than 60</div></label>
-        </div>
-      </div>
-
-      <div class="question">
-        <label class="q-label">How do you currently manage bookings?</label>
-        <div class="q-hint">Select all that apply.</div>
-        <div class="options">
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Through Messenger or WhatsApp</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Through Calendly or a similar tool</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">I handle everything manually</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">I use another platform</div></label>
-        </div>
-      </div>
-
-      <div class="question">
-        <label class="q-label">How do clients currently pay you?</label>
-        <div class="q-hint">Select all that apply.</div>
-        <div class="options">
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">GCash</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Maya (PayMaya)</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Bank transfer (BDO, BPI, UnionBank)</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">ShopeePay</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Cash in person</div></label>
-        </div>
+    <div class="question">
+      <label class="q-label">Which sport do you coach?</label>
+      <div class="q-hint">Select all that apply.</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Tennis</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Badminton</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Table Tennis</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Pickleball</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Golf</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Swimming</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Diving</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Padel</div></label>
       </div>
     </div>
 
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-eyebrow">Section 3 — Coach</div>
-        <div class="section-title">Scheduling and Pricing</div>
-      </div>
-
-      <div class="question">
-        <label class="q-label">What session formats do you offer?</label>
-        <div class="options">
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">One-on-one sessions</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Group sessions</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Online via video call</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">In person</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Workshops or events</div></label>
-        </div>
-      </div>
-
-      <div class="question">
-        <label class="q-label">How long are your typical sessions?</label>
-        <div class="options">
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">30 minutes</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">45 minutes</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">60 minutes</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">90 minutes or longer</div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">It varies per client</div></label>
-        </div>
-      </div>
-
-      <div class="question">
-        <label class="q-label">How do you prefer to price your services?</label>
-        <div class="q-hint">You will set your own rates on your coach profile.</div>
-        <div class="options">
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Per session<span class="option-sub">Client pays for each session individually</span></div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Session bundles or packages<span class="option-sub">e.g. 5 sessions for ₱3,500</span></div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Monthly subscription<span class="option-sub">Client pays a flat monthly rate</span></div></label>
-          <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Free intro session<span class="option-sub">First session free to convert new clients</span></div></label>
-        </div>
-      </div>
-
-      <div class="question">
-        <label class="q-label">What is your starting rate per session? (₱)</label>
-        <input type="number" placeholder="e.g. 800" min="0" oninput="updateProgress()">
-      </div>
-
-      <div class="question">
-        <label class="q-label">What is your cancellation policy?</label>
-        <div class="q-hint">This will appear on your coach profile page.</div>
-        <textarea placeholder="e.g. Clients may reschedule up to 24 hours before their session at no charge. Cancellations within 24 hours are charged 50% of the session fee. No-shows are charged in full." oninput="updateProgress()"></textarea>
-      </div>
-
-      <div class="question">
-        <label class="q-label">Do you need automated reminders sent to clients before sessions?</label>
-        <div class="options">
-          <label class="option"><input type="radio" name="reminders" onchange="toggle(this)"><div class="option-text">Yes, both SMS and email</div></label>
-          <label class="option"><input type="radio" name="reminders" onchange="toggle(this)"><div class="option-text">Email only</div></label>
-          <label class="option"><input type="radio" name="reminders" onchange="toggle(this)"><div class="option-text">SMS only</div></label>
-          <label class="option"><input type="radio" name="reminders" onchange="toggle(this)"><div class="option-text">No, I will handle this myself</div></label>
-        </div>
+    <div class="question">
+      <label class="q-label">How many active clients do you currently handle?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="clientCount" onchange="toggle(this)"><div class="option-text">Less than 10</div></label>
+        <label class="option"><input type="radio" name="clientCount" onchange="toggle(this)"><div class="option-text">10 to 30</div></label>
+        <label class="option"><input type="radio" name="clientCount" onchange="toggle(this)"><div class="option-text">30 to 60</div></label>
+        <label class="option"><input type="radio" name="clientCount" onchange="toggle(this)"><div class="option-text">More than 60</div></label>
       </div>
     </div>
 
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-eyebrow">Section 4 — Coach</div>
-        <div class="section-title">Your Goals on VAMOS</div>
-      </div>
-
-      <div class="question">
-        <label class="q-label">What is the biggest challenge in running your coaching business today?</label>
-        <textarea placeholder="Be as specific as you like. The more we understand your situation, the better we can build around your needs." oninput="updateProgress()"></textarea>
-      </div>
-
-      <div class="question">
-        <label class="q-label">What would make VAMOS worth paying for to you?</label>
-        <textarea placeholder="e.g. Automated GCash payments, a professional booking page I can share with clients, no more chasing payments manually..." oninput="updateProgress()"></textarea>
-      </div>
-
-      <div class="question">
-        <label class="q-label">Would you want to be part of our founding coach group?</label>
-        <div class="q-hint">Founding coaches get early access, a locked-in lower rate, and direct input on what gets built.</div>
-        <div class="options">
-          <label class="option"><input type="radio" name="founding" onchange="toggle(this)"><div class="option-text">Yes, I want to be a founding coach</div></label>
-          <label class="option"><input type="radio" name="founding" onchange="toggle(this)"><div class="option-text">Maybe, I want to know more first</div></label>
-          <label class="option"><input type="radio" name="founding" onchange="toggle(this)"><div class="option-text">No, I will join when it is publicly available</div></label>
-        </div>
+    <div class="question">
+      <label class="q-label">How do you currently manage bookings?</label>
+      <div class="q-hint">Select all that apply.</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Through Messenger or WhatsApp</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Through Calendly or a similar tool</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">I handle everything manually</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">I use another platform</div></label>
       </div>
     </div>
 
+    <div class="question">
+      <label class="q-label">How do clients currently pay you?</label>
+      <div class="q-hint">Select all that apply.</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">GCash</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Maya (PayMaya)</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Bank transfer (BDO, BPI, UnionBank)</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">ShopeePay</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Cash in person</div></label>
+      </div>
+    </div>
+  </div>
 
+  <div class="form-section">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 3 — Coach</div>
+      <div class="section-title">Scheduling and Pricing</div>
+    </div>
 
+    <div class="question">
+      <label class="q-label">What session formats do you offer?</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">One-on-one sessions</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Group sessions</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Online via video call</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">In person</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Workshops or events</div></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">How long are your typical sessions?</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">30 minutes</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">45 minutes</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">60 minutes</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">90 minutes or longer</div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">It varies per client</div></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">How do you prefer to price your services?</label>
+      <div class="q-hint">You will set your own rates on your coach profile.</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Per session<span class="option-sub">Client pays for each session individually</span></div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Session bundles or packages<span class="option-sub">e.g. 5 sessions for ₱3,500</span></div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Monthly subscription<span class="option-sub">Client pays a flat monthly rate</span></div></label>
+        <label class="option"><input type="checkbox" onchange="toggle(this)"><div class="option-text">Free intro session<span class="option-sub">First session free to convert new clients</span></div></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">What is your starting rate per session? (₱)</label>
+      <input type="number" placeholder="e.g. 800" min="0" oninput="updateProgress()">
+    </div>
+
+    <div class="question">
+      <label class="q-label">What is your cancellation policy?</label>
+      <div class="q-hint">This will appear on your coach profile page.</div>
+      <textarea placeholder="e.g. Clients may reschedule up to 24 hours before their session at no charge. Cancellations within 24 hours are charged 50% of the session fee. No-shows are charged in full." oninput="updateProgress()"></textarea>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Do you need automated reminders sent to clients before sessions?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="reminders" onchange="toggle(this)"><div class="option-text">Yes, both SMS and email</div></label>
+        <label class="option"><input type="radio" name="reminders" onchange="toggle(this)"><div class="option-text">Email only</div></label>
+        <label class="option"><input type="radio" name="reminders" onchange="toggle(this)"><div class="option-text">SMS only</div></label>
+        <label class="option"><input type="radio" name="reminders" onchange="toggle(this)"><div class="option-text">No, I will handle this myself</div></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 4 — Coach</div>
+      <div class="section-title">Your Goals on Vamos</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">What is the biggest challenge in running your coaching business today?</label>
+      <textarea placeholder="Be as specific as you like. The more we understand your situation, the better we can build around your needs." oninput="updateProgress()"></textarea>
+    </div>
+
+    <div class="question">
+      <label class="q-label">What would make Vamos worth paying for to you?</label>
+      <textarea placeholder="e.g. Automated GCash payments, a professional booking page I can share with clients, no more chasing payments manually..." oninput="updateProgress()"></textarea>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Would you want to be part of our founding coach group?</label>
+      <div class="q-hint">Founding coaches get early access, a locked-in lower rate, and direct input on what gets built.</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="founding" onchange="toggle(this)"><div class="option-text">Yes, I want to be a founding coach</div></label>
+        <label class="option"><input type="radio" name="founding" onchange="toggle(this)"><div class="option-text">Maybe, I want to know more first</div></label>
+        <label class="option"><input type="radio" name="founding" onchange="toggle(this)"><div class="option-text">No, I will join when it is publicly available</div></label>
+      </div>
+    </div>
+  </div>
 
   <!-- SUBMIT -->
   <div class="submit-block">
+    <h3>Ready to apply?</h3>
     <p>Once you submit, our team will review your application and reach out within 1 to 2 business days.</p>
-    <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">Submit Application</button>
+    <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">Submit Application →</button>
     <p class="privacy">Your information is kept private and will not be shared with third parties.</p>
   </div>
 
@@ -613,17 +587,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  function toggleTheme() {
-    const html = document.documentElement;
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  }
-
-  // Restore saved theme
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-
   function toggle(el) {
     const opt = el.closest('.option');
     if (el.type === 'radio') {
@@ -648,10 +611,7 @@
     document.getElementById('progressLabel').textContent = pct + '% complete';
   }
 
-  // ── Paste your deployed Google Apps Script Web App URL here ──────────────
- const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgBqJlxjuwni4u-2BrZjKmjOl568XjUXUzpU_eY3y3Ot1ftkBiDZvvMuER2Q5wXFQ/exec';
-  // e.g. 'https://script.google.com/macros/s/AKfy.../exec'
-  // ─────────────────────────────────────────────────────────────────────────
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgBqJlxjuwni4u-2BrZjKmjOl568XjUXUzpU_eY3y3Ot1ftkBiDZvvMuER2Q5wXFQ/exec';
 
   async function handleSubmit() {
     const btn = document.getElementById('submitBtn');
@@ -673,9 +633,6 @@
 
     const toast = document.getElementById('toast');
     try {
-      // Google Apps Script requires no-cors for POST from external pages.
-      // The script always returns success if it receives the request —
-      // we show success immediately and let the script handle errors silently.
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -683,12 +640,12 @@
         body: JSON.stringify(data),
       });
       toast.className = 'toast success';
-      toast.textContent = 'Application submitted. We will be in touch soon.';
+      toast.textContent = '✓ Application submitted. We will be in touch soon.';
     } catch {
       toast.className = 'toast error';
       toast.textContent = 'Network error. Please check your connection and try again.';
       btn.disabled = false;
-      btn.textContent = 'Submit Application';
+      btn.textContent = 'Submit Application →';
     }
     toast.style.display = 'block';
     setTimeout(() => toast.style.display = 'none', 4000);
