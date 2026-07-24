@@ -4,6 +4,7 @@
     { "source": "/apply", "destination": "/coach-form.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/terms", "destination": "/terms.html" },
-    { "source": "/thanks", "destination": "/thanks.html" }
+    { "source": "/thanks", "destination": "/thanks.html" },
+    { "source": "/coaches", "destination": "/coaches.html" }
   ]
 }

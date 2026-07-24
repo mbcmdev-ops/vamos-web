@@ -698,7 +698,7 @@
 <div class="hero">
   <div class="hero-tag reveal">
     <span class="dot"></span>
-    <strong>Now open</strong> — 20 founding coach spots available
+    <strong>Now open</strong> — <span id="hero-spots-text">20 founding coach spots available</span>
   </div>
   <h1 class="hero-title reveal">Stop chasing.<br/><em>Start coaching.</em></h1>
   <p class="hero-sub reveal">The booking, scheduling, and payment platform built for sports coaches.</p>
@@ -720,8 +720,8 @@
     <div class="stat-label">VAMOS cut on your session fee</div>
   </div>
   <div class="stat">
-    <div class="stat-num" data-count="20">0</div>
-    <div class="stat-label">founding spots total</div>
+    <div class="stat-num" id="stat-spots-remaining" data-count="20">20</div>
+    <div class="stat-label">founding spots remaining</div>
   </div>
   <div class="stat">
     <div class="stat-num">24<span>/7</span></div>
@@ -1474,6 +1474,23 @@
       testiRow.style.transform = '';
     }
   });
+
+  // ── LIVE SPOTS COUNTER ────────────────────────────────────────────
+  const VAMOS_API = 'https://script.google.com/macros/s/AKfycbxssFMtjPbfnXRCE1r8TEuEDkZkcGxtlxpFzsuFdMFbMXrhcmpictYmVxurRWNjL1l1/exec';
+  (async function loadSpots() {
+    try {
+      const res = await fetch(VAMOS_API);
+      const json = await res.json();
+      const approved = json.approved || 0;
+      const remaining = Math.max(0, 20 - approved);
+      // Update hero tag
+      const heroText = document.getElementById('hero-spots-text');
+      if (heroText) heroText.textContent = remaining + ' of 20 founding coach spots remaining';
+      // Update stat number
+      const statEl = document.getElementById('stat-spots-remaining');
+      if (statEl) { statEl.textContent = remaining; statEl.dataset.count = remaining; }
+    } catch {}
+  })();
 
   // ── PRICING TOGGLE ────────────────────────────────────────────────
   const billingToggle = document.getElementById('billing-toggle');

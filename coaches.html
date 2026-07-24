@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founding Coaches — ready Vamos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --orange:  #E9744B;
+    --orange-d:#c4562e;
+    --black:   #242021;
+    --grey:    #6e6e73;
+    --paper:   #FFF8F6;
+    --peach:   #FDEFE9;
+    --rule:    #e8d8d0;
+    --font-display: 'Special Gothic Expanded One', sans-serif;
+    --font-body:    'Inter', sans-serif;
+  }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--black);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* NAV */
+  nav {
+    background: rgba(255,248,246,0.92);
+    border-bottom: 1px solid var(--rule);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    padding: 0 40px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+  }
+  .nav-logo-crop { height: 48px; overflow: hidden; display: flex; align-items: flex-start; }
+  .nav-logo-img  { height: 133px; width: auto; display: block; margin-top: -46px; }
+  .nav-cta {
+    background: var(--orange);
+    color: #fff;
+    text-decoration: none;
+    padding: 9px 20px;
+    border-radius: 980px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background .15s;
+  }
+  .nav-cta:hover { background: var(--orange-d); }
+
+  /* HERO */
+  .page-hero {
+    background: var(--black);
+    padding: 60px 40px 52px;
+    text-align: center;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+  .page-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: -2px;
+    line-height: 1.0;
+    margin-bottom: 14px;
+  }
+  .page-hero h1 span { color: var(--orange); }
+  .page-hero p {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255,255,255,.45);
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .spots-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(233,116,75,.12);
+    border: 1px solid rgba(233,116,75,.25);
+    color: var(--orange);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 980px;
+    margin-top: 24px;
+  }
+
+  /* GRID */
+  .coaches-section {
+    flex: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 52px 40px 80px;
+    width: 100%;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 24px;
+  }
+  .coaches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .coach-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 22px 20px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .coach-card:hover {
+    border-color: var(--orange);
+    box-shadow: 0 4px 20px rgba(233,116,75,.1);
+  }
+  .coach-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--peach);
+    color: var(--orange);
+    font-size: 18px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    font-family: var(--font-display);
+    letter-spacing: -1px;
+  }
+  .coach-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .coach-business {
+    font-size: 13px;
+    color: var(--grey);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .coach-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag-sport {
+    background: var(--peach);
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 980px;
+    letter-spacing: .2px;
+  }
+  .tag-city {
+    background: #f0efee;
+    color: var(--grey);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 980px;
+  }
+  .founding-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .founding-badge::before {
+    content: '🔒';
+    font-size: 11px;
+  }
+
+  /* EMPTY / LOADING */
+  .state-msg {
+    text-align: center;
+    padding: 60px 24px;
+    color: var(--grey);
+  }
+  .state-msg h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 8px;
+    letter-spacing: -.5px;
+  }
+  .state-msg p { font-size: 15px; line-height: 1.7; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--grey);
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 16px; }
+    .nav-logo-crop { height: 38px; }
+    .nav-logo-img  { height: 106px; margin-top: -35px; }
+    .page-hero { padding: 44px 20px 40px; }
+    .coaches-section { padding: 36px 16px 60px; }
+    .coaches-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" style="text-decoration:none;">
+    <div class="nav-logo-crop">
+      <img src="assets/logos/Vamos-Lockup-Orange.svg" alt="ready Vamos" class="nav-logo-img">
+    </div>
+  </a>
+  <a href="/apply" target="_blank" class="nav-cta">Apply Now</a>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-tag"><span class="live-dot"></span>Founding Coaches</div>
+  <h1>The first <span>20.</span></h1>
+  <p>These coaches believed in Vamos before it launched. They helped shape the product — and they locked their rate forever.</p>
+  <div class="spots-badge">
+    <span id="approved-count">—</span> of 20 spots filled
+  </div>
+</div>
+
+<div class="coaches-section">
+  <div class="section-label">Approved founding coaches</div>
+  <div class="coaches-grid" id="coaches-grid">
+    <div class="state-msg">
+      <h3>Loading coaches…</h3>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 ready Vamos · <a href="/" style="color:inherit;">Back to home</a>
+</footer>
+
+<script>
+  const VAMOS_API = 'https://script.google.com/macros/s/AKfycbxssFMtjPbfnXRCE1r8TEuEDkZkcGxtlxpFzsuFdMFbMXrhcmpictYmVxurRWNjL1l1/exec';
+
+  async function loadCoaches() {
+    const grid = document.getElementById('coaches-grid');
+    try {
+      const res = await fetch(VAMOS_API);
+      const json = await res.json();
+      const coaches = json.coaches || [];
+      const approved = json.approved || 0;
+
+      document.getElementById('approved-count').textContent = approved;
+
+      if (coaches.length === 0) {
+        grid.innerHTML = `
+          <div class="state-msg">
+            <h3>Coming soon.</h3>
+            <p>Our first founding coaches are being reviewed. Check back shortly.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = coaches.map(c => {
+        const initial = (c.name || '?').charAt(0).toUpperCase();
+        const sports = (c.sport || '').split(',').map(s => s.trim()).filter(Boolean);
+        const sportTags = sports.map(s => `<span class="tag-sport">${s}</span>`).join('');
+        const cityTag = c.city ? `<span class="tag-city">📍 ${c.city}</span>` : '';
+        const business = c.business ? `<div class="coach-business">${c.business}</div>` : '';
+        return `
+          <div class="coach-card">
+            <div class="founding-badge">Founding Coach</div>
+            <div class="coach-avatar">${initial}</div>
+            <div class="coach-name">${c.name || 'Coach'}</div>
+            ${business}
+            <div class="coach-tags">${sportTags}${cityTag}</div>
+          </div>`;
+      }).join('');
+
+    } catch {
+      grid.innerHTML = `
+        <div class="state-msg">
+          <h3>Couldn't load coaches.</h3>
+          <p>Please refresh the page to try again.</p>
+        </div>`;
+    }
+  }
+
+  loadCoaches();
+</script>
+</body>
+</html>
