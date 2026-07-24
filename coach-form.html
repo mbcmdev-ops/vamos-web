@@ -71,7 +71,7 @@
     height: 133px;
     width: auto;
     display: block;
-    margin-top: -51px;
+    margin-top: -46px;
     flex-shrink: 0;
   }
   .nav-back {
@@ -298,7 +298,7 @@
     .site-header { padding: 0 16px; }
     .site-header-inner { height: 52px; }
     .nav-logo-crop { height: 38px; }
-    .nav-logo-img { height: 106px; margin-top: -40px; }
+    .nav-logo-img { height: 106px; margin-top: -35px; }
 
     .progress-wrap { padding: 0 16px; }
 
@@ -390,6 +390,100 @@
   }
   .field-error .error-msg { display: block; }
 
+  /* ── SPOTS FULL SCREEN ── */
+  #spots-full-screen {
+    display: none;
+    max-width: var(--max);
+    margin: 56px auto 80px;
+    padding: 0 24px;
+    text-align: center;
+  }
+  .full-icon {
+    width: 64px; height: 64px;
+    background: var(--peach);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 28px;
+  }
+  #spots-full-screen h2 {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 400;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+  #spots-full-screen .sub {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--grey);
+    line-height: 1.7;
+    max-width: 400px;
+    margin: 0 auto 32px;
+  }
+  .waitlist-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .waitlist-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .waitlist-card p {
+    font-size: 13px;
+    color: var(--grey);
+    margin-bottom: 16px;
+  }
+  .waitlist-row {
+    display: flex;
+    gap: 8px;
+  }
+  .waitlist-row input {
+    flex: 1;
+    padding: 11px 14px;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 15px;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .waitlist-row input:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(233,116,75,0.18);
+  }
+  .waitlist-row button {
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 11px 20px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .15s;
+  }
+  .waitlist-row button:hover { background: var(--orange-d); }
+  .waitlist-success {
+    display: none;
+    text-align: center;
+    padding: 12px 0 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--green);
+  }
+  @media (max-width: 600px) {
+    .waitlist-row { flex-direction: column; }
+  }
+
   /* ── TOAST ── */
   .toast {
     display: none;
@@ -420,6 +514,24 @@
   </div>
 </header>
 
+<!-- SPOTS FULL SCREEN (shown when SPOTS_FULL = true) -->
+<div id="spots-full-screen">
+  <div class="full-icon">🔒</div>
+  <h2>Founding spots are filled.</h2>
+  <p class="sub">All 20 founding coach spots have been taken. Regular registration opens soon — join the waitlist and we'll notify you first.</p>
+  <div class="waitlist-card">
+    <h4>Join the regular registration waitlist</h4>
+    <p>No founding perks, but you'll be first in line when we open to everyone.</p>
+    <div class="waitlist-row">
+      <input type="email" id="waitlist-email" placeholder="Your email address">
+      <button onclick="submitWaitlist()">Notify Me</button>
+    </div>
+    <div class="waitlist-success" id="waitlist-success">✓ You're on the list! We'll be in touch.</div>
+  </div>
+</div>
+
+<!-- FORM CONTENT (hidden when SPOTS_FULL = true) -->
+<div id="form-content">
 <div class="progress-wrap">
   <div class="progress-inner">
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
@@ -633,10 +745,44 @@
   </div>
 
 </main>
+</div><!-- /form-content -->
 
 <div class="toast" id="toast"></div>
 
 <script>
+  // ── SPOTS FULL TOGGLE ──────────────────────────────────────────
+  // When all 20 founding spots are taken, set this to true.
+  // The form will be replaced with a waitlist screen automatically.
+  const SPOTS_FULL = false;
+
+  (function() {
+    if (SPOTS_FULL) {
+      document.getElementById('spots-full-screen').style.display = 'block';
+      document.getElementById('form-content').style.display = 'none';
+    }
+  })();
+
+  const WAITLIST_URL = 'https://script.google.com/macros/s/AKfycbzgBqJlxjuwni4u-2BrZjKmjOl568XjUXUzpU_eY3y3Ot1ftkBiDZvvMuER2Q5wXFQ/exec';
+
+  async function submitWaitlist() {
+    const email = document.getElementById('waitlist-email').value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('waitlist-email').focus();
+      return;
+    }
+    try {
+      await fetch(WAITLIST_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'waitlist', email }),
+      });
+    } catch {}
+    document.getElementById('waitlist-success').style.display = 'block';
+    document.querySelector('.waitlist-row').style.display = 'none';
+  }
+
+  // ── FORM LOGIC ─────────────────────────────────────────────────
   function toggle(el) {
     const opt = el.closest('.option');
     if (el.type === 'radio') {
