@@ -707,7 +707,7 @@
     <a href="coach-form.html" target="_blank" class="btn-primary">Apply as Founding Coach</a>
     <a href="#demo" class="btn-text">See how it works ›</a>
   </div>
-  <p class="hero-note reveal">₱299/mo locked for 2 years. <strong>Zero platform cut, forever.</strong></p>
+  <p class="hero-note reveal">₱299/mo locked for 1 year. <strong>Zero platform cut, forever.</strong></p>
 </div>
 
 <!-- STATS -->
@@ -1163,7 +1163,7 @@
       <div class="plan found">
         <div class="plan-name" style="color:var(--orange);">Founding Coach</div>
         <div class="plan-price" style="color:var(--orange);"><span class="monthly-price">₱299<sub>/mo</sub></span><span class="annual-price">₱249<sub>/mo</sub></span></div>
-        <div class="plan-desc">Pro+ features. Rate locked 2 years. Zero platform cut, forever.</div>
+        <div class="plan-desc">Pro+ features. Rate locked 1 year. Zero platform cut, forever.</div>
         <div class="plan-perk">🔒 20 spots only</div>
       </div>
     </div>
@@ -1176,9 +1176,9 @@
     <div class="founding-box reveal">
       <div class="founding-live"><span class="live-dot"></span>20 founding spots — limited availability</div>
       <h2>Be a Founding Coach.<br/><span>Own your spot.</span></h2>
-      <p class="founding-sub">Rate locked at ₱299/mo for 2 years. Zero platform cut, forever.</p>
+      <p class="founding-sub">Rate locked at ₱299/mo for 1 year. Zero platform cut, forever.</p>
       <div class="perk-row">
-        <div class="perk-card"><div class="perk-val">₱299<span style="font-size:14px;font-weight:500;color:rgba(255,255,255,.35)">/mo</span></div><div class="perk-title">Locked for 2 years</div><div class="perk-desc">Your rate stays at ₱299/mo for 2 full years — no matter what standard pricing becomes.</div></div>
+        <div class="perk-card"><div class="perk-val">₱299<span style="font-size:14px;font-weight:500;color:rgba(255,255,255,.35)">/mo</span></div><div class="perk-title">Locked for 1 year</div><div class="perk-desc">Your rate stays at ₱299/mo for 1 full year — no matter what standard pricing becomes.</div></div>
         <div class="perk-card"><div class="perk-val">0%</div><div class="perk-title">Platform cut — forever</div><div class="perk-desc">We never take a cut from your session fees. Every peso you earn goes directly to you.</div></div>
         <div class="perk-card"><div class="perk-val">Day 1</div><div class="perk-title">Featured on Discover Coaches</div><div class="perk-desc">Your profile shown to all players from the moment VAMOS goes live.</div></div>
         <div class="perk-card"><div class="perk-title">Launch marketing</div><div class="perk-desc">Featured in VAMOS launch posts across social media before public opening.</div></div>
@@ -1252,13 +1252,13 @@
       </div>
 
       <div class="faq-item">
-        <button class="faq-q">What happens after my 2-year founding rate?<span class="faq-icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">After 2 years, your subscription will move to the standard Pro+ pricing at the rate applicable at that time. However, the <strong>zero platform cut on your session fees remains forever</strong> — that benefit never expires for founding coaches, regardless of what plan you're on.</div></div>
+        <button class="faq-q">What happens after my 1-year founding rate?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">After 1 year, your subscription will move to the standard Pro+ pricing at the rate applicable at that time. However, the <strong>zero platform cut on your session fees remains forever</strong> — that benefit never expires for founding coaches, regardless of what plan you're on.</div></div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q">Is there a contract or lock-in period?<span class="faq-icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">No contract, no lock-in. VAMOS is a monthly subscription — you can cancel anytime. The founding coach rate is locked for 2 years as long as you stay subscribed, but there is no penalty for leaving. We'd rather earn your loyalty than enforce it.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">No contract, no lock-in. VAMOS is a monthly subscription — you can cancel anytime. The founding coach rate is locked for 1 year as long as you stay subscribed, but there is no penalty for leaving. We'd rather earn your loyalty than enforce it.</div></div>
       </div>
 
       <div class="faq-item">
@@ -1477,17 +1477,18 @@
   });
 
   // ── LIVE SPOTS COUNTER ────────────────────────────────────────────
-  const VAMOS_API = 'https://script.google.com/macros/s/AKfycbxssFMtjPbfnXRCE1r8TEuEDkZkcGxtlxpFzsuFdMFbMXrhcmpictYmVxurRWNjL1l1/exec';
+  const SUPABASE_URL = 'https://cthrvpunwpvbcwscshup.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_F54fR6bfQ739FhTjFeSDiw_VN0qqRIt';
   (async function loadSpots() {
     try {
-      const res = await fetch(VAMOS_API);
-      const json = await res.json();
-      const approved = json.approved || 0;
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/applications?status=eq.approved&select=id`, {
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+      });
+      const rows = await res.json();
+      const approved = Array.isArray(rows) ? rows.length : 0;
       const remaining = Math.max(0, 20 - approved);
-      // Update hero tag
       const heroText = document.getElementById('hero-spots-text');
       if (heroText) heroText.textContent = remaining + ' of 20 founding coach spots remaining';
-      // Update stat number
       const statEl = document.getElementById('stat-spots-remaining');
       if (statEl) { statEl.textContent = remaining; statEl.dataset.count = remaining; }
     } catch {}

@@ -763,7 +763,8 @@
     }
   })();
 
-  const WAITLIST_URL = 'https://script.google.com/macros/s/AKfycbxssFMtjPbfnXRCE1r8TEuEDkZkcGxtlxpFzsuFdMFbMXrhcmpictYmVxurRWNjL1l1/exec';
+  const SUPABASE_URL = 'https://cthrvpunwpvbcwscshup.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_F54fR6bfQ739FhTjFeSDiw_VN0qqRIt';
 
   async function submitWaitlist() {
     const email = document.getElementById('waitlist-email').value.trim();
@@ -772,11 +773,14 @@
       return;
     }
     try {
-      await fetch(WAITLIST_URL, {
+      await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'waitlist', email }),
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+        },
+        body: JSON.stringify({ email }),
       });
     } catch {}
     document.getElementById('waitlist-success').style.display = 'block';
@@ -857,7 +861,27 @@
     return valid;
   }
 
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxssFMtjPbfnXRCE1r8TEuEDkZkcGxtlxpFzsuFdMFbMXrhcmpictYmVxurRWNjL1l1/exec';
+  const LABEL_MAP = {
+    'First name': 'first_name',
+    'Last name': 'last_name',
+    'Email address': 'email',
+    'Mobile number': 'mobile',
+    'Where are you based?': 'city',
+    'Coaching business or practice name': 'business_name',
+    'Which sport do you coach?': 'sport',
+    'How many active clients do you currently handle?': 'active_clients',
+    'How do you currently manage bookings?': 'manage_bookings',
+    'How do clients currently pay you?': 'client_payments',
+    'What session formats do you offer?': 'session_formats',
+    'How long are your typical sessions?': 'session_length',
+    'How do you prefer to price your services?': 'pricing_preference',
+    'What is your starting rate per session? (₱)': 'starting_rate',
+    'What is your cancellation policy?': 'cancellation_policy',
+    'Do you need automated reminders sent to clients before sessions?': 'automated_reminders',
+    'What is the biggest challenge in running your coaching business today?': 'biggest_challenge',
+    'What would make Vamos worth paying for to you?': 'worth_paying',
+    'Would you want to be part of our founding coach group?': 'founding_interest',
+  };
 
   async function handleSubmit() {
     if (!validate()) return;
@@ -866,27 +890,38 @@
     btn.disabled = true;
     btn.textContent = 'Submitting...';
 
-    const data = { role: 'coach' };
+    const raw = {};
     document.querySelectorAll('.main input[type="text"], .main input[type="email"], .main input[type="number"], .main textarea').forEach((el, i) => {
       if (el.value.trim()) {
         const lbl = el.closest('.question')?.querySelector('.q-label')?.textContent?.trim().replace('*','') || ('field_' + i);
-        data[lbl] = el.value.trim();
+        raw[lbl] = el.value.trim();
       }
     });
     document.querySelectorAll('.main input[type="radio"]:checked, .main input[type="checkbox"]:checked').forEach(el => {
       const lbl = el.closest('.question')?.querySelector('.q-label')?.textContent?.trim().replace('*','') || el.name;
       const val = el.closest('.option')?.querySelector('.option-text')?.childNodes[0]?.textContent?.trim() || '';
-      data[lbl] = data[lbl] ? data[lbl] + ', ' + val : val;
+      raw[lbl] = raw[lbl] ? raw[lbl] + ', ' + val : val;
     });
+
+    const data = {};
+    for (const [label, value] of Object.entries(raw)) {
+      const col = LABEL_MAP[label];
+      if (col) data[col] = value;
+    }
 
     const toast = document.getElementById('toast');
     try {
-      await fetch(SCRIPT_URL, {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/applications`, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Prefer': 'return=minimal',
+        },
         body: JSON.stringify(data),
       });
+      if (!res.ok) throw new Error('Failed');
       window.location.href = '/thanks';
     } catch {
       toast.className = 'toast error';
