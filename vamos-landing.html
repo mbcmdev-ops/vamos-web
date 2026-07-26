@@ -658,6 +658,117 @@
       .mock { padding: 14px 14px; }
       .nav-pill { font-size: 13px; padding: 7px 14px; }
     }
+
+    /* ── HERO PHOTO REVEAL ───────────────────────────────────────── */
+    .hero-photo-wrap {
+      max-width: 1280px; margin: 0 auto; padding: 0 32px 80px;
+    }
+    .hero-photo {
+      width: 100%; height: 520px; object-fit: cover;
+      border-radius: 28px; display: block;
+      box-shadow: 0 48px 100px rgba(0,0,0,0.14);
+    }
+    @media (max-width: 900px) { .hero-photo { height: 340px; border-radius: 20px; } .hero-photo-wrap { padding: 0 20px 60px; } }
+    @media (max-width: 560px) { .hero-photo { height: 220px; border-radius: 14px; } .hero-photo-wrap { padding: 0 16px 48px; } }
+
+    /* ── SPORTS BENTO ───────────────────────────────────────────── */
+    .sports-bento {
+      max-width: 1280px; margin: 0 auto; padding: 0 32px 80px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 240px 240px;
+      gap: 12px;
+    }
+    .bento-img {
+      border-radius: 20px; overflow: hidden;
+      position: relative; cursor: pointer;
+    }
+    .bento-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform .5s ease;
+    }
+    .bento-img:hover img { transform: scale(1.05); }
+    .bento-img.tall { grid-row: span 2; }
+    .bento-label {
+      position: absolute; bottom: 14px; left: 14px;
+      background: rgba(0,0,0,0.45); backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fff; font-size: 11px; font-weight: 700;
+      padding: 5px 12px; border-radius: 980px; letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+    @media (max-width: 900px) {
+      .sports-bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; padding: 0 20px 60px; }
+      .bento-img.tall { grid-row: span 1; }
+      .bento-img { height: 200px; }
+    }
+    @media (max-width: 560px) {
+      .sports-bento { grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 16px 40px; }
+      .bento-img { height: 160px; border-radius: 14px; }
+    }
+
+    /* ── PHOTO PAIN CARDS ───────────────────────────────────────── */
+    .pain-photo-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 16px; margin-top: 60px;
+    }
+    .pain-photo-card {
+      border-radius: 20px; overflow: hidden;
+      position: relative; height: 300px; background: var(--black);
+    }
+    .pain-photo-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.38; display: block;
+      transition: opacity .3s ease, transform .5s ease;
+    }
+    .pain-photo-card:hover img { opacity: 0.28; transform: scale(1.05); }
+    .pain-overlay {
+      position: absolute; inset: 0; padding: 28px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%);
+    }
+    .pain-photo-n {
+      font-size: 10px; font-weight: 800; color: var(--orange);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .pain-photo-card h3 {
+      font-size: 18px; font-weight: 700; color: #fff;
+      letter-spacing: -.3px; margin-bottom: 8px; line-height: 1.25;
+    }
+    .pain-photo-card p {
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,.65); line-height: 1.6;
+    }
+    @media (max-width: 900px) {
+      .pain-photo-grid { grid-template-columns: 1fr 1fr; }
+      .pain-photo-card { height: 260px; }
+    }
+    @media (max-width: 560px) {
+      .pain-photo-grid { grid-template-columns: 1fr; }
+      .pain-photo-card { height: 240px; border-radius: 14px; }
+    }
+
+    /* ── PLAN FEATURES LIST ─────────────────────────────────────── */
+    .plan-features { list-style: none; margin-top: 16px; }
+    .plan-features li {
+      font-size: 12px; font-weight: 500; color: var(--grey);
+      padding: 5px 0; border-bottom: 1px solid var(--rule);
+      display: flex; gap: 7px; align-items: flex-start; line-height: 1.4;
+    }
+    .plan-features li:last-child { border-bottom: none; }
+    .plan-features .ck { color: var(--orange); font-weight: 800; flex-shrink: 0; font-size: 11px; margin-top: 1px; }
+    .plan-cta {
+      display: block; text-align: center; margin-top: 20px;
+      background: var(--orange); color: #fff; font-size: 13px; font-weight: 700;
+      padding: 10px 16px; border-radius: 980px; text-decoration: none;
+      transition: background .15s;
+    }
+    .plan-cta:hover { background: var(--orange-d); }
+    .plan-cta.outline {
+      background: transparent; color: var(--orange);
+      border: 1.5px solid var(--orange);
+    }
+    .plan-cta.outline:hover { background: var(--orange); color: #fff; }
   </style>
 </head>
 <body>
@@ -710,6 +821,11 @@
   <p class="hero-note reveal">₱299/mo locked for 1 year. <strong>Zero platform cut, forever.</strong></p>
 </div>
 
+<!-- HERO PHOTO -->
+<div class="hero-photo-wrap reveal">
+  <img class="hero-photo" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=2400&q=85" alt="Sports coach training an athlete on court" loading="eager">
+</div>
+
 <!-- STATS -->
 <div class="stats-row reveal">
   <div class="stat">
@@ -752,6 +868,30 @@
   </div>
 </div>
 
+<!-- SPORTS BENTO -->
+<div class="sports-bento">
+  <div class="bento-img tall">
+    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=900&q=85" alt="Tennis coaching">
+    <span class="bento-label">Tennis</span>
+  </div>
+  <div class="bento-img">
+    <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=700&q=85" alt="Badminton">
+    <span class="bento-label">Badminton</span>
+  </div>
+  <div class="bento-img">
+    <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=700&q=85" alt="Swimming coach">
+    <span class="bento-label">Swimming</span>
+  </div>
+  <div class="bento-img">
+    <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=700&q=85" alt="Golf coaching">
+    <span class="bento-label">Golf</span>
+  </div>
+  <div class="bento-img">
+    <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=700&q=85" alt="Pickleball">
+    <span class="bento-label">Pickleball</span>
+  </div>
+</div>
+
 <!-- STATEMENT -->
 <div class="statement-section">
   <p class="reveal">
@@ -768,13 +908,31 @@
       <span class="tag">The problem</span>
       <h2 class="title">Every week, coaches lose time<br/>they can never get back.</h2>
     </div>
-    <div class="pain-grid reveal">
-      <div class="pain-card stagger-child"><span class="pain-n">01</span><h3>Booking on Messenger</h3><p>20 minutes of back-and-forth to confirm a single session — for every client, every week.</p></div>
-      <div class="pain-card stagger-child"><span class="pain-n">02</span><h3>Chasing payment screenshots</h3><p>You send your payment details and wait. Sometimes payment arrives. Sometimes the session starts anyway.</p></div>
-      <div class="pain-card stagger-child"><span class="pain-n">03</span><h3>No-shows with no recourse</h3><p>A player doesn't show. You lose the session fee and the court fee. There is nothing you can do.</p></div>
-      <div class="pain-card stagger-child"><span class="pain-n">04</span><h3>Reminders you forget to send</h3><p>A player misses an early session because nobody sent a reminder the night before. You can't remember everyone.</p></div>
-      <div class="pain-card stagger-child"><span class="pain-n">05</span><h3>No professional presence</h3><p>Your "booking page" is a pinned Messenger message or a note in your bio. You deserve better.</p></div>
-      <div class="pain-card stagger-child"><span class="pain-n">06</span><h3>Revenue you can't see</h3><p>No clear picture of what you earned last month, which clients are active, or your busiest day.</p></div>
+    <div class="pain-photo-grid reveal">
+      <div class="pain-photo-card stagger-child">
+        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=800&q=85" alt="Booking on Messenger">
+        <div class="pain-overlay"><span class="pain-photo-n">01</span><h3>Booking on Messenger</h3><p>20 minutes of back-and-forth to confirm a single session — for every client, every week.</p></div>
+      </div>
+      <div class="pain-photo-card stagger-child">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=85" alt="Chasing payment">
+        <div class="pain-overlay"><span class="pain-photo-n">02</span><h3>Chasing payment screenshots</h3><p>You send your QR code and wait. Sometimes payment arrives. Sometimes the session starts anyway.</p></div>
+      </div>
+      <div class="pain-photo-card stagger-child">
+        <img src="https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?auto=format&fit=crop&w=800&q=85" alt="Empty court no-show">
+        <div class="pain-overlay"><span class="pain-photo-n">03</span><h3>No-shows with no recourse</h3><p>A player doesn't show. You lose the session fee and the court rental. Nothing you can do.</p></div>
+      </div>
+      <div class="pain-photo-card stagger-child">
+        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=85" alt="Missed reminder">
+        <div class="pain-overlay"><span class="pain-photo-n">04</span><h3>Reminders you forget to send</h3><p>A player misses an early session because nobody sent a reminder. You can't remember everyone.</p></div>
+      </div>
+      <div class="pain-photo-card stagger-child">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=85" alt="No professional presence">
+        <div class="pain-overlay"><span class="pain-photo-n">05</span><h3>No professional presence</h3><p>Your booking page is a pinned Messenger message or a note in your bio. You deserve better.</p></div>
+      </div>
+      <div class="pain-photo-card stagger-child">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=85" alt="Revenue you can't see">
+        <div class="pain-overlay"><span class="pain-photo-n">06</span><h3>Revenue you can't track</h3><p>No clear picture of what you earned, which clients are active, or your busiest slots.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1140,31 +1298,70 @@
     </div>
     <div class="price-grid reveal" id="price-grid">
       <div class="plan">
-        <div class="plan-name">Starter</div>
-        <div class="plan-price"><span class="monthly-price">Free</span><span class="annual-price">Free</span></div>
-        <div class="plan-desc">Up to 5 bookings/month. QR payments. Basic calendar and profile.</div>
+        <div class="plan-name">Free</div>
+        <div class="plan-price"><span class="monthly-price">₱0</span><span class="annual-price">₱0</span></div>
+        <div class="plan-desc">For coaches just starting out. No credit card needed, ever.</div>
+        <ul class="plan-features">
+          <li><span class="ck">✓</span>Booking link and calendar</li>
+          <li><span class="ck">✓</span>Up to 10 clients</li>
+          <li><span class="ck">✓</span>QR code payments</li>
+          <li><span class="ck">✓</span>Basic client records</li>
+        </ul>
+        <a href="coach-form.html" class="plan-cta outline">Get started free</a>
       </div>
       <div class="plan">
         <div class="plan-name">Pro</div>
-        <div class="plan-price"><span class="monthly-price">₱499<sub>/mo</sub></span><span class="annual-price">₱416<sub>/mo</sub></span></div>
-        <div class="plan-desc">Unlimited bookings, dashboard, client roster, automated reminders.</div>
+        <div class="plan-price"><span class="monthly-price">₱399<sub>/mo</sub></span><span class="annual-price">₱332<sub>/mo</sub></span></div>
+        <div class="plan-desc">For coaches ready to run their practice professionally.</div>
+        <ul class="plan-features">
+          <li><span class="ck">✓</span>Unlimited bookings and clients</li>
+          <li><span class="ck">✓</span>Automated SMS/email reminders</li>
+          <li><span class="ck">✓</span>GCash and Maya payment collection</li>
+          <li><span class="ck">✓</span>Cancellation policy settings</li>
+          <li><span class="ck">✓</span>Basic earnings dashboard</li>
+        </ul>
+        <a href="coach-form.html" class="plan-cta outline">Get Pro</a>
       </div>
       <div class="plan pop">
         <div class="pop-tag">Most Popular</div>
         <div class="plan-name">Pro+</div>
-        <div class="plan-price"><span class="monthly-price">₱999<sub>/mo</sub></span><span class="annual-price">₱833<sub>/mo</sub></span></div>
-        <div class="plan-desc">Everything in Pro + automated payouts, no-show protection, instant payout.</div>
+        <div class="plan-price"><span class="monthly-price">₱699<sub>/mo</sub></span><span class="annual-price">₱582<sub>/mo</sub></span></div>
+        <div class="plan-desc">Everything in Pro, plus tools that pay for themselves.</div>
+        <ul class="plan-features">
+          <li><span class="ck">✓</span>No-show fee enforcement</li>
+          <li><span class="ck">✓</span>Cancellation fee auto-collection</li>
+          <li><span class="ck">✓</span>Instant payouts to GCash/bank</li>
+          <li><span class="ck">✓</span>Advanced analytics and reports</li>
+          <li><span class="ck">✓</span>Priority support</li>
+        </ul>
+        <a href="coach-form.html" class="plan-cta">Get Pro+</a>
       </div>
       <div class="plan">
         <div class="plan-name">Academy</div>
-        <div class="plan-price"><span class="monthly-price">₱1,299<sub>/mo</sub></span><span class="annual-price">₱1,083<sub>/mo</sub></span></div>
-        <div class="plan-desc">Multi-coach accounts, venue management, priority support.</div>
+        <div class="plan-price"><span class="monthly-price">₱1,299<sub>/mo</sub></span><span class="annual-price">₱1,082<sub>/mo</sub></span></div>
+        <div class="plan-desc">For small academies managing multiple coaches and venues.</div>
+        <ul class="plan-features">
+          <li><span class="ck">✓</span>Up to 5 coach accounts</li>
+          <li><span class="ck">✓</span>Shared court and venue scheduling</li>
+          <li><span class="ck">✓</span>Group and batch enrollment</li>
+          <li><span class="ck">✓</span>Centralized payments and reporting</li>
+          <li><span class="ck">✓</span>Dedicated onboarding</li>
+        </ul>
+        <a href="coach-form.html" class="plan-cta outline">Get Academy</a>
       </div>
       <div class="plan found">
         <div class="plan-name" style="color:var(--orange);">Founding Coach</div>
-        <div class="plan-price" style="color:var(--orange);"><span class="monthly-price">₱299<sub>/mo</sub></span><span class="annual-price">₱249<sub>/mo</sub></span></div>
-        <div class="plan-desc">Pro+ features. Rate locked 1 year. Zero platform cut, forever.</div>
+        <div class="plan-price" style="color:var(--orange);"><span class="monthly-price">₱299<sub>/mo</sub></span><span class="annual-price">₱299<sub>/mo</sub></span></div>
+        <div class="plan-desc">Full Pro+ access. Rate locked for 1 year. Zero platform cut, forever.</div>
+        <ul class="plan-features">
+          <li><span class="ck">✓</span>Everything in Pro+</li>
+          <li><span class="ck">✓</span>Rate locked for your first year</li>
+          <li><span class="ck">✓</span>0% platform cut, forever</li>
+          <li><span class="ck">✓</span>Featured on Discover Coaches</li>
+          <li><span class="ck">✓</span>1-on-1 onboarding with the founder</li>
+        </ul>
         <div class="plan-perk">🔒 20 spots only</div>
+        <a href="coach-form.html" target="_blank" class="plan-cta">Apply now ›</a>
       </div>
     </div>
   </div>
