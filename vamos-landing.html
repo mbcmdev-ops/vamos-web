@@ -675,8 +675,8 @@
     .sports-bento {
       max-width: 1280px; margin: 0 auto; padding: 0 32px 80px;
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: 240px 240px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 260px 260px;
       gap: 12px;
     }
     .bento-img {
@@ -823,7 +823,7 @@
 
 <!-- HERO PHOTO -->
 <div class="hero-photo-wrap reveal">
-  <img class="hero-photo" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=2400&q=85" alt="Sports coach training an athlete on court" loading="eager">
+  <img class="hero-photo" src="https://images.unsplash.com/photo-1526232761-0bca6a4e5847?auto=format&fit=crop&w=2400&q=85" alt="Sports coach training an athlete on court" loading="eager">
 </div>
 
 <!-- STATS -->
@@ -870,12 +870,12 @@
 
 <!-- SPORTS BENTO -->
 <div class="sports-bento">
-  <div class="bento-img tall">
-    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=900&q=85" alt="Tennis coaching">
+  <div class="bento-img">
+    <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=900&q=85" alt="Tennis coaching">
     <span class="bento-label">Tennis</span>
   </div>
   <div class="bento-img">
-    <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=700&q=85" alt="Badminton">
+    <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=700&q=85" alt="Badminton">
     <span class="bento-label">Badminton</span>
   </div>
   <div class="bento-img">
@@ -887,8 +887,12 @@
     <span class="bento-label">Golf</span>
   </div>
   <div class="bento-img">
-    <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=700&q=85" alt="Pickleball">
+    <img src="https://images.unsplash.com/photo-1604680630817-e6f5c4cfbd1c?auto=format&fit=crop&w=700&q=85" alt="Pickleball">
     <span class="bento-label">Pickleball</span>
+  </div>
+  <div class="bento-img">
+    <img src="https://images.unsplash.com/photo-1687895854856-ade0d90db1e5?auto=format&fit=crop&w=700&q=85" alt="Padel">
+    <span class="bento-label">Padel</span>
   </div>
 </div>
 
@@ -1474,7 +1478,7 @@
 
 <!-- FINAL CTA -->
 <div class="final-cta reveal">
-  <h2>Your clients deserve a smoother experience.<br/>So do you.</h2>
+  <h2 style="font-size:clamp(22px,3vw,36px);">Your clients deserve a smoother experience.<br/>So do you.</h2>
   <p>Join VAMOS before the founding coach window closes.</p>
   <a href="coach-form.html" target="_blank" class="btn-primary" style="font-size:18px;padding:18px 44px;">Apply Now — It's Free</a>
 </div>
