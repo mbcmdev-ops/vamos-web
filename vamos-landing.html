@@ -127,10 +127,8 @@
 
     /* ── SPORTS TICKER ────────────────────────────────────────────── */
     .ticker-wrap { overflow: hidden; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 14px 0; }
-    @keyframes ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    .ticker-inner { display: flex; width: max-content; animation: ticker-scroll 22s linear infinite; }
-    .ticker-item { display: flex; align-items: center; padding: 0 0 0 32px; font-size: 14px; font-weight: 600; color: var(--grey); white-space: nowrap; }
-    .ticker-item::after { content: ''; display: inline-block; width: 1px; height: 14px; background: var(--rule); margin-left: 32px; flex-shrink: 0; }
+    .ticker-inner { display: flex; will-change: transform; }
+    .ticker-item { display: flex; align-items: center; padding: 0 28px; font-size: 14px; font-weight: 600; color: var(--grey); white-space: nowrap; border-right: 1px solid var(--rule); flex-shrink: 0; }
     .ticker-item span { color: var(--orange); }
 
     /* ── SECTION BASE ─────────────────────────────────────────────── */
@@ -682,10 +680,10 @@
     .hero-overlay {
       position: absolute; inset: 0; z-index: 1;
       background: linear-gradient(
-        160deg,
-        rgba(36,32,33,0.58) 0%,
-        rgba(36,32,33,0.18) 50%,
-        rgba(36,32,33,0.72) 100%
+        to bottom,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.45) 50%,
+        rgba(0,0,0,0.65) 100%
       );
     }
     .hero-section .hero {
@@ -868,27 +866,39 @@
 
 <!-- HERO — full-bleed with slideshow background -->
 <div class="hero-section">
-  <!-- Background slideshow -->
+  <!-- Background slideshow — one slide per offered sport -->
   <div class="hero-slides">
     <div class="hero-slide active">
-      <img src="https://images.unsplash.com/photo-1461897104016-0b3b00cc81ee?auto=format&fit=crop&w=2400&q=85" alt="Tennis coach" loading="eager">
+      <img src="https://images.unsplash.com/photo-1634840542403-1a9b1067aaa0?auto=format&fit=crop&w=2400&q=85" alt="Tennis coaching" loading="eager">
       <span class="slide-label">Tennis</span>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=2400&q=85" alt="Badminton coach" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=2400&q=85" alt="Badminton coaching" loading="lazy">
       <span class="slide-label">Badminton</span>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?auto=format&fit=crop&w=2400&q=85" alt="Swimming coach" loading="lazy">
-      <span class="slide-label">Swimming</span>
+      <img src="https://images.unsplash.com/photo-1737476997205-b3336182f215?auto=format&fit=crop&w=2400&q=85" alt="Pickleball coaching" loading="lazy">
+      <span class="slide-label">Pickleball</span>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?auto=format&fit=crop&w=2400&q=85" alt="Golf coach" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?auto=format&fit=crop&w=2400&q=85" alt="Table Tennis coaching" loading="lazy">
+      <span class="slide-label">Table Tennis</span>
+    </div>
+    <div class="hero-slide">
+      <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=2400&q=85" alt="Golf coaching" loading="lazy">
       <span class="slide-label">Golf</span>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1629901925121-8a141c2a42f4?auto=format&fit=crop&w=2400&q=85" alt="Pickleball coach" loading="lazy">
-      <span class="slide-label">Pickleball</span>
+      <img src="https://images.unsplash.com/photo-1778145079390-064ef2d1d2d8?auto=format&fit=crop&w=2400&q=85" alt="Swimming coaching" loading="lazy">
+      <span class="slide-label">Swimming</span>
+    </div>
+    <div class="hero-slide">
+      <img src="https://images.unsplash.com/photo-1560088939-a88259febdce?auto=format&fit=crop&w=2400&q=85" alt="Diving coaching" loading="lazy">
+      <span class="slide-label">Diving</span>
+    </div>
+    <div class="hero-slide">
+      <img src="https://images.unsplash.com/photo-1646651105426-e8c8ee9badde?auto=format&fit=crop&w=2400&q=85" alt="Padel coaching" loading="lazy">
+      <span class="slide-label">Padel</span>
     </div>
   </div>
   <!-- Gradient overlay -->
@@ -907,13 +917,16 @@
     </div>
     <p class="hero-note reveal">₱299/mo locked for 1 year. <strong>Zero platform cut, forever.</strong></p>
   </div>
-  <!-- Slide dots -->
+  <!-- Slide dots (8 sports) -->
   <div class="slide-nav">
-    <button class="slide-dot active" aria-label="Slide 1"></button>
-    <button class="slide-dot" aria-label="Slide 2"></button>
-    <button class="slide-dot" aria-label="Slide 3"></button>
-    <button class="slide-dot" aria-label="Slide 4"></button>
-    <button class="slide-dot" aria-label="Slide 5"></button>
+    <button class="slide-dot active" aria-label="Tennis"></button>
+    <button class="slide-dot" aria-label="Badminton"></button>
+    <button class="slide-dot" aria-label="Pickleball"></button>
+    <button class="slide-dot" aria-label="Table Tennis"></button>
+    <button class="slide-dot" aria-label="Golf"></button>
+    <button class="slide-dot" aria-label="Swimming"></button>
+    <button class="slide-dot" aria-label="Diving"></button>
+    <button class="slide-dot" aria-label="Padel"></button>
   </div>
 </div>
 
@@ -1813,6 +1826,28 @@
       timer = setInterval(() => goTo(cur + 1), 5000);
     }));
     timer = setInterval(() => goTo(cur + 1), 5000);
+  })();
+
+  // ── TICKER (seamless pixel-perfect scroll) ────────────────────
+  (function() {
+    const inner = document.querySelector('.ticker-inner');
+    if (!inner) return;
+    // Clone the items so we have 2 full sets side-by-side
+    const items = Array.from(inner.children);
+    items.forEach(item => inner.appendChild(item.cloneNode(true)));
+    // Wait one frame so layout is complete, then measure one set
+    requestAnimationFrame(() => {
+      const setWidth = items.reduce((w, el) => w + el.offsetWidth, 0);
+      let pos = 0;
+      const speed = 0.5;
+      function tick() {
+        pos += speed;
+        if (pos >= setWidth) pos -= setWidth;
+        inner.style.transform = `translateX(-${pos}px)`;
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
   })();
 
 </script>
