@@ -8,7 +8,9 @@
   <meta name="description" content="Bookings, payments, and reminders — built specifically for sports coaches."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Special+Gothic+Expanded+One&family=Caveat:wght@700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Special+Gothic+Expanded+One&family=Caveat:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Special+Gothic+Expanded+One&family=Caveat:wght@700&display=swap" rel="stylesheet"/></noscript>
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1634840542403-1a9b1067aaa0?auto=format&fit=crop&w=1200&q=85" fetchpriority="high"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -869,35 +871,35 @@
   <!-- Background slideshow — one slide per offered sport -->
   <div class="hero-slides">
     <div class="hero-slide active">
-      <img src="https://images.unsplash.com/photo-1634840542403-1a9b1067aaa0?auto=format&fit=crop&w=2400&q=85" alt="Tennis coaching" loading="eager">
+      <img src="https://images.unsplash.com/photo-1634840542403-1a9b1067aaa0?auto=format&fit=crop&w=1200&q=85" alt="Tennis coaching" loading="eager" fetchpriority="high">
       <span class="slide-label">Tennis</span>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=2400&q=85" alt="Badminton coaching" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=1200&q=80" alt="Badminton coaching" loading="lazy">
       <span class="slide-label">Badminton</span>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1737476997205-b3336182f215?auto=format&fit=crop&w=2400&q=85" alt="Pickleball coaching" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1737476997205-b3336182f215?auto=format&fit=crop&w=1200&q=80" alt="Pickleball coaching" loading="lazy">
       <span class="slide-label">Pickleball</span>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?auto=format&fit=crop&w=2400&q=85" alt="Table Tennis coaching" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?auto=format&fit=crop&w=1200&q=80" alt="Table Tennis coaching" loading="lazy">
       <span class="slide-label">Table Tennis</span>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=2400&q=85" alt="Golf coaching" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=1200&q=80" alt="Golf coaching" loading="lazy">
       <span class="slide-label">Golf</span>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1778145079390-064ef2d1d2d8?auto=format&fit=crop&w=2400&q=85" alt="Swimming coaching" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1778145079390-064ef2d1d2d8?auto=format&fit=crop&w=1200&q=80" alt="Swimming coaching" loading="lazy">
       <span class="slide-label">Swimming</span>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1560088939-a88259febdce?auto=format&fit=crop&w=2400&q=85" alt="Diving coaching" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1560088939-a88259febdce?auto=format&fit=crop&w=1200&q=80" alt="Diving coaching" loading="lazy">
       <span class="slide-label">Diving</span>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1646651105426-e8c8ee9badde?auto=format&fit=crop&w=2400&q=85" alt="Padel coaching" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1646651105426-e8c8ee9badde?auto=format&fit=crop&w=1200&q=80" alt="Padel coaching" loading="lazy">
       <span class="slide-label">Padel</span>
     </div>
   </div>
@@ -975,27 +977,27 @@
 <!-- SPORTS BENTO -->
 <div class="sports-bento">
   <div class="bento-img">
-    <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=900&q=85" alt="Tennis coaching">
+    <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=600&q=75" alt="Tennis coaching" loading="lazy">
     <span class="bento-label">Tennis</span>
   </div>
   <div class="bento-img">
-    <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=700&q=85" alt="Badminton">
+    <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=500&q=75" alt="Badminton" loading="lazy">
     <span class="bento-label">Badminton</span>
   </div>
   <div class="bento-img">
-    <img src="https://images.unsplash.com/photo-1560088939-a88259febdce?auto=format&fit=crop&w=700&q=85" alt="Swimming coach">
+    <img src="https://images.unsplash.com/photo-1560088939-a88259febdce?auto=format&fit=crop&w=500&q=75" alt="Swimming coach" loading="lazy">
     <span class="bento-label">Swimming</span>
   </div>
   <div class="bento-img">
-    <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=700&q=85" alt="Golf coaching">
+    <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=500&q=75" alt="Golf coaching" loading="lazy">
     <span class="bento-label">Golf</span>
   </div>
   <div class="bento-img">
-    <img src="https://images.unsplash.com/photo-1737476997205-b3336182f215?auto=format&fit=crop&w=700&q=85" alt="Pickleball">
+    <img src="https://images.unsplash.com/photo-1737476997205-b3336182f215?auto=format&fit=crop&w=500&q=75" alt="Pickleball" loading="lazy">
     <span class="bento-label">Pickleball</span>
   </div>
   <div class="bento-img">
-    <img src="https://images.unsplash.com/photo-1646651105426-e8c8ee9badde?auto=format&fit=crop&w=700&q=85" alt="Padel">
+    <img src="https://images.unsplash.com/photo-1646651105426-e8c8ee9badde?auto=format&fit=crop&w=500&q=75" alt="Padel" loading="lazy">
     <span class="bento-label">Padel</span>
   </div>
 </div>
@@ -1018,27 +1020,27 @@
     </div>
     <div class="pain-photo-grid reveal">
       <div class="pain-photo-card stagger-child">
-        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=800&q=85" alt="Booking on Messenger">
+        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=600&q=75" alt="Booking on Messenger" loading="lazy">
         <div class="pain-overlay"><span class="pain-photo-n">01</span><h3>Booking on Messenger</h3><p>20 minutes of back-and-forth to confirm a single session — for every client, every week.</p></div>
       </div>
       <div class="pain-photo-card stagger-child">
-        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=85" alt="Chasing payment">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=75" alt="Chasing payment" loading="lazy">
         <div class="pain-overlay"><span class="pain-photo-n">02</span><h3>Chasing payment screenshots</h3><p>You send your QR code and wait. Sometimes payment arrives. Sometimes the session starts anyway.</p></div>
       </div>
       <div class="pain-photo-card stagger-child">
-        <img src="https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?auto=format&fit=crop&w=800&q=85" alt="Empty court no-show">
+        <img src="https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?auto=format&fit=crop&w=600&q=75" alt="Empty court no-show" loading="lazy">
         <div class="pain-overlay"><span class="pain-photo-n">03</span><h3>No-shows with no recourse</h3><p>A player doesn't show. You lose the session fee and the court rental. Nothing you can do.</p></div>
       </div>
       <div class="pain-photo-card stagger-child">
-        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=85" alt="Missed reminder">
+        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=75" alt="Missed reminder" loading="lazy">
         <div class="pain-overlay"><span class="pain-photo-n">04</span><h3>Reminders you forget to send</h3><p>A player misses an early session because nobody sent a reminder. You can't remember everyone.</p></div>
       </div>
       <div class="pain-photo-card stagger-child">
-        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=85" alt="No professional presence">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=75" alt="No professional presence" loading="lazy">
         <div class="pain-overlay"><span class="pain-photo-n">05</span><h3>No professional presence</h3><p>Your booking page is a pinned Messenger message or a note in your bio. You deserve better.</p></div>
       </div>
       <div class="pain-photo-card stagger-child">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=85" alt="Revenue you can't see">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=75" alt="Revenue you can't see" loading="lazy">
         <div class="pain-overlay"><span class="pain-photo-n">06</span><h3>Revenue you can't track</h3><p>No clear picture of what you earned, which clients are active, or your busiest slots.</p></div>
       </div>
     </div>
@@ -1415,7 +1417,7 @@
           <li><span class="ck">✓</span>QR code payments</li>
           <li><span class="ck">✓</span>Basic client records</li>
         </ul>
-        <a href="coach-form.html" class="plan-cta outline">Get started free</a>
+        <a href="coach-form.html" target="_blank" class="plan-cta outline">Get started free</a>
       </div>
       <div class="plan">
         <div class="plan-name">Pro</div>
@@ -1428,7 +1430,7 @@
           <li><span class="ck">✓</span>Cancellation policy settings</li>
           <li><span class="ck">✓</span>Basic earnings dashboard</li>
         </ul>
-        <a href="coach-form.html" class="plan-cta outline">Get Pro</a>
+        <a href="coach-form.html" target="_blank" class="plan-cta outline">Get Pro</a>
       </div>
       <div class="plan pop">
         <div class="pop-tag">Most Popular</div>
@@ -1442,7 +1444,7 @@
           <li><span class="ck">✓</span>Advanced analytics and reports</li>
           <li><span class="ck">✓</span>Priority support</li>
         </ul>
-        <a href="coach-form.html" class="plan-cta">Get Pro+</a>
+        <a href="coach-form.html" target="_blank" class="plan-cta">Get Pro+</a>
       </div>
       <div class="plan">
         <div class="plan-name">Academy</div>
@@ -1455,7 +1457,7 @@
           <li><span class="ck">✓</span>Centralized payments and reporting</li>
           <li><span class="ck">✓</span>Dedicated onboarding</li>
         </ul>
-        <a href="coach-form.html" class="plan-cta outline">Get Academy</a>
+        <a href="coach-form.html" target="_blank" class="plan-cta outline">Get Academy</a>
       </div>
       <div class="plan found">
         <div class="plan-name" style="color:var(--orange);">Founding Coach</div>
@@ -1616,10 +1618,16 @@
 
   // ── GRADIENT ORB (follows mouse in hero zone) ──────────────────
   const orb = document.getElementById('hero-orb');
+  let orbRaf = false;
   document.addEventListener('mousemove', (e) => {
-    orb.style.left = e.clientX + 'px';
-    orb.style.top  = e.clientY + 'px';
-  });
+    if (orbRaf) return;
+    orbRaf = true;
+    requestAnimationFrame(() => {
+      orb.style.left = e.clientX + 'px';
+      orb.style.top  = e.clientY + 'px';
+      orbRaf = false;
+    });
+  }, { passive: true });
 
 
   // ── MAGNETIC BUTTON ───────────────────────────────────────────
@@ -1832,21 +1840,27 @@
   (function() {
     const inner = document.querySelector('.ticker-inner');
     if (!inner) return;
-    // Clone the items so we have 2 full sets side-by-side
     const items = Array.from(inner.children);
     items.forEach(item => inner.appendChild(item.cloneNode(true)));
-    // Wait one frame so layout is complete, then measure one set
     requestAnimationFrame(() => {
       const setWidth = items.reduce((w, el) => w + el.offsetWidth, 0);
       let pos = 0;
       const speed = 0.5;
+      let rafId = null;
       function tick() {
         pos += speed;
         if (pos >= setWidth) pos -= setWidth;
         inner.style.transform = `translateX(-${pos}px)`;
-        requestAnimationFrame(tick);
+        rafId = requestAnimationFrame(tick);
       }
-      requestAnimationFrame(tick);
+      // Pause ticker when off-screen to save CPU
+      const tickerObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { if (!rafId) rafId = requestAnimationFrame(tick); }
+          else { cancelAnimationFrame(rafId); rafId = null; }
+        });
+      });
+      tickerObs.observe(inner.parentElement);
     });
   })();
 
